@@ -3,6 +3,8 @@
 
 This is an Open-Source Content Management System(CMS) developed with [ASP.NET Core](http://www.yogihosting.com/category/aspnet-core/) framework by Microsoft. Use it to create any type of Responsive websites with unlimited pages and unlimited blogs.
 
+**This CMS works like WordPress CMS and you will like it.**
+
 ## Programming Language, Web Technologies, Frameworks and Scripts used to Build this CMS.
 
 I have build this CMS using the following:
@@ -53,19 +55,19 @@ Then run these 4 commands one by one:
 
 `PM> dotnet ef database update --context CMSContext`
 
-## Step 3: Create the SQL Stored Procedures and SQL Function
+## Step 3: Create the SQL Stored Procedures and SQL Functions
 
 I have placed a file called `script.sql` on this repository. You run this script in your SQL Server Management Studio on the CMS database (not on Identiy Database). This script will add all the SQL SPs and SQL Functions.
 
 ## Step 4: Create ADMIN User
 
-The ADMIN user will be created in the Identity Database and this user will access the CMS to add, update, delte the pages, blogs, media, menu, etc.
+The ADMIN user should be created in the Identity Database and this user will access the CMS to add, update, delte the pages, blogs, media, menus, etc.
 
 Run your application in Visual Studio (shortcut F5 key) and then open the below URL in your browser to create the Admin user:
 
 `http://localhost:60905/Login/Create`
 
-Change 60905 port to the one your VS sets for this CMS. If you are running this CMS online in a domain then URL will be:
+Change port 60905  to the one your VS has set for this CMS. If you are running this CMS online in a domain then URL will be:
 
 `http://yourdomain.com/Login/Create`
 
@@ -97,7 +99,7 @@ b. Add Menu
 
 In the CMS go to `Page > Add Menu`. There are 2 sets of textboxes, on on the right side and other on the bottom. 
 
-On the right side text box you add menu items. So add 'Home' for name field and 'home' for slug field.
+On the right side text boxes you add menu items. So add 'Home' for name field and 'home' for slug field.
 
 On the bottom text boxes you give the menu name. So add 'Main' for name and select 'Active' for status. 
 
@@ -111,7 +113,8 @@ You can now View the website by running this URL in your browser:
 
 You can ignore step 6 completely and just run the `data.sql` file (provided in this repository) in your SQL Server Management Studio on the CMS database (not on Identiy Database). This script file will add all your DEMO data.
 
+## In the End
 
+You will love the 'Sree RAM' CMS made in ASP.NET Core framework. Star this Repository to show your support. 
 
-
-
+Please use the GitHub issue tracker to ask questions.
