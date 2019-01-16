@@ -30,6 +30,7 @@ Then open the `appsettings.json` file given in the root of the CMS and change th
  }
 }
 `
+
 To run this CMS you will need 2 databases. One that will store pages, blogs, images, etc. The other one will be used by Identity Management to do authentication and authorization of Admin User.
 
 You don't have to learn Identity for using this CMS but if you still like then visit [How to Setup and Configure Identity Membership System in ASP.NET Core](http://www.yogihosting.com/aspnet-core-identity-setup/)
@@ -52,7 +53,11 @@ Then run these 4 commands one by one:
 
 `PM> dotnet ef database update --context CMSContext`
 
-## Step 3: Create ADMIN User
+## Step 3: Create the SQL Stored Procedures and SQL Function
+
+I have placed a file called `script.sql` on this repository. You run this script in your SQL Server Management Studio on the CMS database (not on Identiy Database). This script will add all the SQL SPs and SQL Functions.
+
+## Step 4: Create ADMIN User
 
 The ADMIN user will be created in the Identity Database and this user will access the CMS to add, update, delte the pages, blogs, media, menu, etc.
 
@@ -69,7 +74,7 @@ By default the Admin user will be created with the following Credentials:
 `Username - admin`
 `password - Secret123$`
 
-## Step 4: Login to CMS using Admin URL
+## Step 5: Login to CMS using Admin URL
 
 The login URL of the CMS is:
 
@@ -80,7 +85,31 @@ Login with the following Credentials:
 `Username - admin`
 `password - Secret123$`
 
-## Step 5: Create Demo Data
+## Step 6: Create Demo Data
+
+You need to add one page and one menu in the CMS for the website to start displaying.
+
+a. Add Page
+
+After loggin to the CMS go to `Page > Add Page` and create a new page called 'Home'. Add it's name as 'Home', url as 'Home' and inside the description add the HTML for the home page of your site.
+
+b. Add Menu
+
+In the CMS go to `Page > Add Menu`. There are 2 sets of textboxes, on on the right side and other on the bottom. 
+
+On the right side text box you add menu items. So add 'Home' for name field and 'home' for slug field.
+
+On the bottom text boxes you give the menu name. So add 'Main' for name and select 'Active' for status. 
+
+Finally Click the submit button at the bottom. 
+
+You can now View the website by running this URL in your browser:
+
+`http://localhost:60905`
+
+## Demo Data by running SQL Script
+
+You can ignore step 6 completely and just run the `data.sql` file (provided in this repository) in your SQL Server Management Studio on the CMS database (not on Identiy Database). This script file will add all your DEMO data.
 
 
 
