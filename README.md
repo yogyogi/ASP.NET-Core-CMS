@@ -37,7 +37,7 @@ You don't have to learn Identity for using this CMS but if you still like then v
 
 ## Step 2: Run EF Core Migration commands
 
-The [EF Core Migrations[http://www.yogihosting.com/migrations-entity-framework-core/) commands will create both the databases for this CMS.
+The [EF Core Migrations](http://www.yogihosting.com/migrations-entity-framework-core/) commands will create both the databases for this CMS.
 
 Open Package Manage Console and go to the directory of the Startup.cs class:
 
