@@ -1,0 +1,53 @@
+﻿@model Media
+@{
+    ViewBag.Title = "Update Media";
+}
+
+<article>
+    <h1>Update Media</h1>
+    @if (!string.IsNullOrEmpty(ViewBag.result))
+    {
+        <h2>@ViewBag.result</h2>
+    }
+    <form method="post" class="row">
+        <div class="col-sm-6" id="mediaLeft"><img src="~/@Model.DisplayUrl" /></div>
+        <div class="col-sm-6" id="mediaRight">
+            <p><b>File Name: </b><input type="text" asp-for="Name" readonly="readonly" class="label" /></p>
+            <p><b>File type: </b><input type="text" asp-for="FileType" readonly="readonly" class="label" /></p>
+            <p>
+                <b>Uploaded on: </b><input type="text" asp-for="AddedOn" readonly="readonly" class="label" value="@String.Format("{0:ddd, MMM d, yyyy}", Model.AddedOn)" />
+            </p>
+            <p><b>File size: </b><input type="text" asp-for="FileSize" readonly="readonly" class="label" /></p>
+            @if (Model.Dimension != null)
+            {
+                <p><b>Dimensions: </b><input type="text" asp-for="Dimension" readonly="readonly" class="label" /></p>
+            }
+            <hr />
+            <div class="control">
+                <label asp-for="Url"></label>
+                <input type="text" readonly="readonly" value="@Context.Request.Scheme://@Context.Request.Host/@Model.Url" />
+                <input type="hidden" asp-for="Url" />
+                <span asp-validation-for="Url"></span>
+            </div>
+            <div class="control">
+                <label asp-for="Title"></label>
+                <input type="text" asp-for="Title" />
+                <span asp-validation-for="Title"></span>
+            </div>
+            <div class="control">
+                <label asp-for="Alt"></label>
+                <input type="text" asp-for="Alt" />
+                <span asp-validation-for="Alt"></span>
+            </div>
+            <div class="control">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description"></textarea>
+                <span asp-validation-for="Description"></span>
+            </div>
+            <div class="control">
+                <button type="submit">Save</button>
+            </div>
+            <hr />
+        </div>
+    </form>
+</article>

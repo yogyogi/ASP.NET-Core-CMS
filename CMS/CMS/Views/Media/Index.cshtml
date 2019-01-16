@@ -1,0 +1,174 @@
+﻿@model Media
+@{
+    ViewBag.Title = "Add Media";
+}
+
+<article>
+    <h1>Media Library <a class="h1NewPage" asp-action="Add">Add New</a></h1>
+    <div class="mediaToolbar">
+        <div class="bulkDiv">
+            <div class="first">
+                <select id="fileType">
+                    <option value="all">All Media</option>
+                    <option value="image">Images</option>
+                    <option value="audio">Audio</option>
+                    <option value="video">Video</option>
+                    <option value="compress">Compressed</option>
+                    <option value="text">Text</option>
+                    <option value="word">Word</option>
+                </select>
+                <select id="date" asp-items="@Model.MediaDate">
+                    <option value="all">Date</option>
+                </select>
+                <button type="submit" id="bulkSubmit">Bulk Select</button>
+            </div>
+            <div class="second"><button id="backButton">Back</button> <button id="deleteButton" disabled>Delete</button>Start selecting items by left clicking on them.</div>
+        </div>
+        <div class="search">
+            <input id="name" type="text" placeholder="Search" />
+        </div>
+    </div>
+    <ul id="allMedia">
+        @Html.Raw(Model.Result)
+    </ul>
+    <input type="hidden" id="page" value="1" />
+    <img id="loadingImg" src="~/images/loading.gif" hidden="hidden" class="right" />
+</article>
+
+@section Script {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".first > button").click(function () {
+                $(this).parent().hide();
+                $(".second").show();
+                var checkbox = $("<input type=\"checkbox\">")
+                if ($("#allMedia li input[type='checkbox']").length == 0) {
+                    $("#allMedia li").prepend(checkbox);
+                }
+
+                $("#allMedia li a").on("click", function (e) {
+                    e.preventDefault();
+                });
+            });
+
+            $(".second > #backButton").click(function () {
+                $(this).parent().hide();
+                $(".first").show();
+                $("#allMedia li input[type='checkbox']").remove();
+                $("#allMedia li").removeClass("selected");
+
+                $("#allMedia li a").unbind('click');
+            });
+
+            $("#allMedia").on("change", "input[type='checkbox']", function () {
+                if ($(this).prop('checked'))
+                    $(this).parent().addClass("selected");
+                else
+                    $(this).parent().removeClass("selected");
+
+                if ($("#allMedia li input[type='checkbox']:checked").length > 0)
+                    $("#deleteButton").prop("disabled", false);
+                else
+                    $("#deleteButton").prop("disabled", true);
+            });
+
+            $(".second > #deleteButton").click(function () {
+                var checkbox = $("#allMedia li input[type='checkbox']:checked");
+                var ids = "", paths = "";
+                $(checkbox).each(function (index, value) {
+                    var anchorLink = $(this).siblings().attr("href").replace("/Media/Update/", "")
+                    ids = ids + anchorLink + ",";
+
+                    var dataUrl = $(this).siblings().find("img").attr("data-url")
+                    paths = paths + dataUrl + ",";
+                });
+                ids = ids.substring(0, ids.length - 1);
+                paths = paths.substring(0, paths.length - 1);
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("DeleteMedia")",
+                    data: {ids: ids, paths: paths},
+                    dataType: "html",
+                    success: function (msg) {
+                        if (msg == "Success")
+                            $("#allMedia li input[type='checkbox']:checked").parent().remove();
+                    },
+                    error: function (req, status, error) {
+                        alert(error);
+                    }
+                });
+            });
+
+            $('#wrapper').css("height", $(window).height());
+            $('#wrapper').css("overflow", "auto");
+
+            $('#wrapper').scroll(function () {
+                var div = $(this);
+                if (div[0].scrollHeight - div.scrollTop() - 100 <= div.height()) {
+                    //alert('Reached the bottom!');
+                    if ($('#page').val() != 'end') {
+                        var page = parseInt($('#page').val());
+                        page = page + 1;
+                        $('#page').val(page);
+                        GetMediaWithPaging();
+                    }
+                }
+            });
+
+            $("#name").keyup(function () {
+                Initialize();
+                GetMediaWithPaging();
+            });
+
+            $('#fileType').change(function () {
+                Initialize();
+                GetMediaWithPaging();
+            });
+
+            $('#date').change(function () {
+                Initialize();
+                GetMediaWithPaging();
+            });
+
+            function GetMediaWithPaging() {
+                var fileType = $('#fileType').val();
+                var date = $("#date").val();
+                var page = $('#page').val();
+                var name = $('#name').val();
+
+                //http://stackoverflow.com/questions/1191485/how-to-call-ajaxstart-on-specific-ajax-calls
+                $(document).unbind(".firstCall");
+                $(document).on("ajaxStart.firstCall", function () {
+                    $("#loadingImg").show();
+                });
+                $(document).on("ajaxStop.firstCall", function () {
+                    $("#loadingImg").hide();
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Media/GetMediaWithPaging",
+                    data: { fileType: fileType, date: date, page: page, name: name },
+                    dataType: "html",
+                    success: function (msg) {
+                        if (msg == '')
+                            $('#page').val('end');
+                        else
+                            $("#allMedia").append(msg);
+                    },
+                    error: function (req, status, error) {
+                        alert(error);
+                    }
+                });
+                return false;
+            }
+
+            function Initialize() {
+                $('#page').val('1');
+                $('#allMedia').html('');
+            }
+        });
+    </script>
+}

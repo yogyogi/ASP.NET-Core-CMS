@@ -1,0 +1,12 @@
+﻿<div asp-validation-summary="All" class="text-danger"></div>
+<article>
+    <h1>@ViewBag.Title</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="name"></label>
+            <input name="name" class="form-control" />
+        </div>
+        <button type="submit" class="btn-primary">Create</button>
+        <a asp-action="Role" class="btn btn-secondary">Cancel</a>
+    </form>
+</article>

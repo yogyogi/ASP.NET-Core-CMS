@@ -1,0 +1,130 @@
+﻿@model MenuList
+
+@{
+    ViewBag.Title = "All Menu";
+}
+<article>
+    <h1>All Menu <a class="h1NewPage" asp-action="Add">Add Menu</a></h1>
+    <h2 id="messageH2"></h2>
+    <div id="infoDiv">
+        <div class="pageTypeDiv">
+            <ul>
+                @{
+                    string statusAllClass = null, statusActiveClass = null, statusInActiveClass = null;
+                    if (Model.status == null)
+                    {
+                        statusAllClass = "fontWeightBold";
+                    }
+                    else if (Model.status == 1)
+                    {
+                        statusActiveClass = "fontWeightBold";
+                    }
+                    else if (Model.status == 0)
+                    {
+                        statusInActiveClass = "fontWeightBold";
+                    }
+                }
+                <li><a asp-action="Index" class="@statusAllClass">All<span>(@Model.allTotal)</span></a></li>
+                <li><a asp-action="Index" asp-route-status="1" class="@statusActiveClass">Active<span>(@Model.activeTotal)</span></a></li>
+                <li><a asp-action="Index" asp-route-status="0" class="@statusInActiveClass">Inactive<span>(@Model.inactiveTotal)</span></a></li>
+            </ul>
+        </div>
+        <div class="pageSearchDiv">
+            <form asp-action="Index" method="get">
+                <input type="text" asp-for="searchText" /> <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <div id="workDiv">
+        <div class="bulkDiv">
+            <select asp-for="status">
+                <option value="Status">Status</option>
+                <option value="1">Active</option>
+                <option value="0">InActive</option>
+            </select><button type="submit" id="bulkSubmit">Apply</button>
+        </div>
+        <div class="pagingDiv">
+            <div page-model="@Model.pagingInfo" status="@Model.status" search-text="@Model.searchText" page-action="Index" page-classes-enabled="true" page-class="paging" page-class-selected="active"></div>
+        </div>
+        <div id="pageDiv">
+            <table>
+                <thead>
+                    <tr class="row"><th class="col-sm-1"><input id="mainCheckBox" type="checkbox" /></th><th class="col-sm-5">Name</th><th class="col-sm-3">Status</th><th class="col-sm-3">Added On</th></tr>
+                </thead>
+                <tbody id="pageTbody">
+                    @foreach (var p in Model.menu)
+                    {
+                        <tr class="row">
+                            <td class="col-sm-1"><input type="checkbox" id="@p.Id" /></td>
+                            <td class="col-sm-5">@p.Name<div> <a asp-action="Add" asp-route-id="@p.Id">Edit</a></div></td>
+                            <td class="col-sm-3">
+                                @{
+                                    string status = p.Status == true ? "Active" : "InActive";
+                                    @status;
+                                }
+                            </td>
+                            <td class="col-sm-3">@String.Format("{0:ddd, MMM d, yyyy}", p.AddedOn)</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <div class="pagingDiv">
+                                <div page-model="@Model.pagingInfo" status="@Model.status" search-text="@Model.searchText" page-action="Index" page-classes-enabled="true" page-class="paging" page-class-selected="active"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</article>
+@section Script {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#pageDiv").find('input[type="checkbox"]').each(function () {
+                $(this).prop("checked", false);
+            });
+            $("#bulkSubmit").click(function (e) {
+                var idChecked = GetIdChecked();
+                var statusToChange = $("#status").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Menu/UpdateBulkStatus",
+                    data: { idChecked: idChecked, statusToChange: statusToChange },
+                    dataType: "html",
+                    success: function (msg) {
+                        $("#messageH2").html(msg);
+                        setTimeout(function () { location.reload(); }, 2000);
+                    },
+                    error: function (req, status, error) {
+                        alert(error);
+                    }
+                });
+                return false;
+            });
+            function GetIdChecked() {
+                var idChecked = "";
+                $("#pageTbody").find('input[type="checkbox"]').each(function () {
+                    if ($(this).prop("checked")) {
+                        idChecked = idChecked + this.id + ",";
+                    }
+                });
+                return idChecked.substring(0, idChecked.length - 1);
+            }
+            $("#mainCheckBox").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#pageTbody").find('input[type="checkbox"]').each(function () {
+                        $(this).prop("checked", true);
+                    });
+                }
+                else {
+                    $("#pageTbody").find('input[type="checkbox"]').each(function () {
+                        $(this).prop("checked", false);
+                    });
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title - CMS</title>
+    <link rel="stylesheet" href="~/css/bundlecss.min.css" />
+</head>
+<body>
+    <div id="wrapper" class="container-fluid">
+        <div class="row">
+            @await Component.InvokeAsync(nameof(UserDetail))
+            <section id="content" class="col-sm-9">@RenderBody()</section>
+            <footer id="mainFooter" class="col-sm-12">&copy; @DateTime.Now.Year - Shree RAM CMS</footer>
+        </div>
+    </div>
+    <script src="~/js/bundlejs.min.js"></script>
+    @RenderSection("Script", false)
+</body>
+</html>

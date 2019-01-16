@@ -1,0 +1,65 @@
+﻿@model Login
+@{
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CMS</title>
+    <link rel="stylesheet" asp-href-include="css/admin.css" />
+</head>
+<body>
+    <div id="wrapper">
+        <header id="adminBar">
+            Welcome to the CMS
+        </header>
+        <div id="contentBar">
+            <section id="contentFull">
+                @*<article>
+                        <h1>Login</h1>
+                        <h2>@ViewBag.Result</h2>
+
+                        <form asp-action="Index" method="post">
+                            <div class="control">
+                                <label asp-for="UserName"></label>
+                                <input asp-for="UserName" class="form-control" />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+                            <div class="control">
+                                <label asp-for="Password"></label>
+                                <input asp-for="Password" class="form-control" />
+                                <span asp-validation-for="Password" class="text-box"></span>
+                            </div>
+                            <div class="control">
+                                <button type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </article>*@
+                <article>
+                    <h1>Login</h1>
+                    <h2>@TempData["result"]</h2>
+
+                    <div class="text-danger" asp-validation-summary="All"></div>
+                    <form asp-action="Index" method="post">
+                        <div class="control">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="text-box" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="control">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="text-box" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="control">
+                            <button type="submit">Submit</button>
+                        </div>
+                    </form>
+                </article>
+            </section>
+        </div>
+        <footer id="mainFooter">&copy; @DateTime.Now.Year - My CMS</footer>
+    </div>
+</body>
+

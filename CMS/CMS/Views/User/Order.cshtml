@@ -1,0 +1,26 @@
+﻿@model List<Order>
+@{
+    ViewBag.Title = "Orders";
+}
+<article>
+    <h1>Order</h1>
+    <div id="workDiv">
+        <div id="pageDiv">
+            <table>
+                <thead>
+                    <tr class="row"><th class="col-sm-7">Course Name</th><th class="col-sm-3">Added On</th><th class="col-sm-2"></th></tr>
+                </thead>
+                <tbody id="pageTbody">
+                    @foreach (var p in Model)
+                    {
+                        <tr class="row">
+                            <td class="col-sm-7">@p.CourseName</td>
+                            <td class="col-sm-3">@String.Format("{0:ddd, MMM d, yyyy}", p.AddedOn)</td>
+                            <td class="col-sm-2"><a target="_blank" asp-controller="Home" asp-action="ViewCourse" asp-route-id="@p.CourseId" asp-route-url="@p.CourseUrl" class="btn btn-primary">View</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</article>

@@ -1,0 +1,10 @@
+﻿@model Order
+<tr class="row">
+    <td class="col-sm-1"><input type="checkbox" id="@Model.Id" /></td>
+    <td class="col-sm-2">@Model.UserName</td>
+    <td class="col-sm-2">@Model.Email</td>
+    <td class="col-sm-2">@Model.PhoneNumber</td>
+    <td class="col-sm-2">@Model.CourseName</td>
+    <td class="col-sm-2">@Model.ValidatedBy</td>
+    <td class="col-sm-1">@String.Format("{0:ddd, MMM d, yyyy}", Model.AddedOn)</td>
+</tr>

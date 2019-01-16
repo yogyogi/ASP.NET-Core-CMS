@@ -1,0 +1,222 @@
+﻿@model Blog
+<script src="~/js/CKEditor/ckeditor.js" type="text/javascript" language="javascript"></script>
+
+<article>
+    <h1>@ViewBag.Title</h1>
+    <h2>@TempData["result"]</h2>
+
+    <form method="post">
+        <div class="control">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="text-box" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div class="lineControl">
+            <label asp-for="Url"></label>:-<label>@Context.Request.Scheme://@Context.Request.Host/</label>
+            <input asp-for="Url" class="text-box" />-id-@Model.Id
+            <span asp-validation-for="Url"></span>
+        </div>
+        <div class="control">
+            <label asp-for="PrimaryImageId"></label>
+            <div class="primaryImage">
+                <img id="primaryImg" src="@Model.PrimaryImageUrl" />
+                <img id="crossImg" src="~/images/close.png" />
+                <input type="hidden" asp-for="PrimaryImageId" />
+                <input type="hidden" asp-for="PrimaryImageUrl" />
+            </div>
+        </div>
+        <div class="control">
+            <label asp-for="CategoryId"></label>
+            <select class="form-control" asp-for="CategoryId" asp-items="ViewBag.CategoryList">
+                <option selected value="Select">Select</option>
+            </select>
+            <span asp-validation-for="CategoryId"></span>
+        </div>
+        <div class="control">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description"></textarea>
+            <script type="text/javascript" language="javascript">
+                CKEDITOR.replace(@Html.IdFor(model => model.Description));
+                CKEDITOR.config.allowedContent = true
+                CKEDITOR.ignoreEmptyParagraph = true;
+            </script>
+            <span asp-validation-for="Description"></span>
+        </div>
+        <div class="control">
+            <label asp-for="MetaTitle"></label>
+            <input asp-for="MetaTitle" class="text-box" />
+            <span asp-validation-for="MetaTitle"></span>
+        </div>
+        <div class="control">
+            <label asp-for="MetaKeyword"></label>
+            <input asp-for="MetaKeyword" class="text-box" />
+            <span asp-validation-for="MetaKeyword"></span>
+        </div>
+        <div class="control">
+            <label asp-for="MetaDescription"></label>
+            <input asp-for="MetaDescription" class="text-box" />
+            <span asp-validation-for="MetaDescription"></span>
+        </div>
+        <div class="control">
+            <label asp-for="Status"></label>
+            <select class="form-control" asp-for="Status">
+                <option value="true">Active</option>
+                <option value="false">InActive</option>
+            </select>
+        </div>
+        <div class="control">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+    <!-- Bootstrap Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <div class="mediaToolbar">
+                        <div class="bulkDiv">
+                            <div class="first">
+                                <a asp-controller="Media" asp-action="Add" target="_blank" class="h1NewPage">Add New</a>
+                                <select id="date" asp-items="ViewBag.MediaDate">
+                                    <option value="All">Date</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="search">
+                            <input id="serchName" type="text" placeholder="Search" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body" style="overflow:auto;height:300px;">
+                    <ul id="allMedia"></ul>
+
+                    <input type="hidden" id="page" value="1" />
+                    <img id="loadingImg" src="~/images/loading.gif" hidden="hidden" class="right" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Set as Primary Image</button>
+                </div>
+            </div>
+            <!-- END Modal content-->
+
+        </div>
+    </div>
+    <!-- END Bootstrap Modal -->
+</article>
+
+@section Script {
+    <script>
+        $(document).ready(function () {
+            ShowHideCross();
+
+            $("#primaryImg").click(function () {
+                $("#myModal").modal("show");
+                if ($('#page').val() != 'end') {
+                    Initialize();
+                    GetMediaWithPaging()
+                }
+            });
+
+            $("#crossImg").click(function () {
+                $("#primaryImg").attr("src", "/images/addphoto.jpg")
+                $("#PrimaryImageId").val("");
+                $("#PrimaryImageUrl").val("");
+
+                $(this).hide();
+            });
+
+            function ShowHideCross() {
+                if ($("#primaryImg").attr("src") != "/images/addphoto.jpg")
+                    $("#crossImg").css("display", "block")
+                else
+                    $("#crossImg").css("display", "none")
+            }
+
+            $(".modal-footer > button").click(function () {
+                var imageId = $("#allMedia li input[type='checkbox']:checked").siblings().attr("href").replace("/Media/Update/", "")
+                var imageUrl = $("#allMedia li input[type='checkbox']:checked").parent().find("img").attr("data-url")
+
+                $("#primaryImg").attr("src", imageUrl)
+                $("#PrimaryImageUrl").val(imageUrl);
+                $("#PrimaryImageId").val(imageId);
+
+                ShowHideCross();
+            });
+
+            $("#allMedia").on("change", "input[type='checkbox']", function () {
+                if ($(this).prop('checked')) {
+                    $("#allMedia li input[type='checkbox']").prop("checked", false);
+                    $("#allMedia li").removeClass("selected");
+                    $(this).prop("checked", true);
+                    $(this).parent().addClass("selected");
+                }
+                else
+                    $(this).parent().removeClass("selected");
+            });
+
+            $('.modal-body').scroll(function () {
+                var div = $(this);
+                if (div[0].scrollHeight - div.scrollTop() - 100 <= div.height()) {
+                    //alert('Reached the bottom!');
+                    if ($('#page').val() != 'end') {
+                        var page = parseInt($('#page').val());
+                        page = page + 1;
+                        $('#page').val(page);
+                        GetMediaWithPaging();
+                    }
+                }
+            });
+
+            $("#serchName").keyup(function () {
+                Initialize();
+                GetMediaWithPaging();
+            });
+
+            $('#date').change(function () {
+                Initialize();
+                GetMediaWithPaging();
+            });
+
+            function GetMediaWithPaging() {
+                var date = $("#date").val();
+                var page = $('#page').val();
+                var name = $('#serchName').val();
+
+                //http://stackoverflow.com/questions/1191485/how-to-call-ajaxstart-on-specific-ajax-calls
+                $(document).unbind(".firstCall");
+                $(document).on("ajaxStart.firstCall", function () {
+                    $("#loadingImg").show();
+                });
+                $(document).on("ajaxStop.firstCall", function () {
+                    $("#loadingImg").hide();
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Blog/GetMediaWithPaging",
+                    data: {date: date, page: page, name: name},
+                    dataType: "html",
+                    success: function (msg) {
+                        if (msg == '')
+                            $('#page').val('end');
+                        else
+                            $("#allMedia").append(msg);
+                    },
+                    error: function (req, status, error) {
+                        alert(error);
+                    }
+                });
+                return false;
+            }
+
+            function Initialize() {
+                $('#page').val('1');
+                $('#allMedia').html('');
+            }
+        });
+    </script>
+}

@@ -1,0 +1,43 @@
+﻿@model AppUser
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<article>
+    <h1>@ViewBag.Title</h1>
+    <h2>@ViewBag.Result</h2>
+    <form asp-action="Edit" method="post">
+        <div class="control">
+            <label asp-for="Id"></label>
+            <input asp-for="Id" class="text-box" disabled />
+        </div>
+        <div class="control">
+            <label asp-for="UserName"></label>
+            <input asp-for="UserName" class="text-box" disabled />
+        </div>
+        <div class="control">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="text-box" />
+        </div>
+        <div class="control">
+            <label for="password">Password</label>
+            <input type="hidden" asp-for="PasswordHash" />
+            <input name="password" class="text-box" />
+        </div>
+        <div class="control">
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" class="text-box" />
+        </div>
+        <div class="control">
+            <label asp-for="Country"></label>
+            <select asp-for="Country" class="form-control" asp-items="@new SelectList(Enum.GetNames(typeof(Country)))">
+                <option disabled selected value="">Select Country</option>
+            </select>
+        </div>
+        <div class="control">
+            <label asp-for="Age"></label>
+            <input asp-for="Age" class="text-box" />
+        </div>
+        <button type="submit" class="btn-primary">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</article>
