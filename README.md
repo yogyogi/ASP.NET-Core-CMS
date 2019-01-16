@@ -1,2 +1,2 @@
 # Shree RAM CMS - the world's first ASP.NET-Core-CMS
-![Hugo](https://github.com/yogyogi/ASP.NET-Core-CMS/blob/master/sree-ram-cms.png.png)
+![Shree RAM CMS](https://raw.githubusercontent.com/yogyogi/ASP.NET-Core-CMS/master/sree-ram-cms.png)
