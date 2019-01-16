@@ -66,7 +66,23 @@ Change 60905 port to the one your VS sets for this CMS. If you are running this 
 
 By default the Admin user will be created with the following Credentials:
 
-Username - admin
-password - Secret123$
+`Username - admin`
+`password - Secret123$`
+
+## Step 4: Login to CMS using Admin URL
+
+The login URL of the CMS is:
+
+`http://localhost:60905/Login`
+
+Login with the following Credentials:
+
+`Username - admin`
+`password - Secret123$`
+
+## Step 5: Create Demo Data
+
+
+
 
 
