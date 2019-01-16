@@ -42,6 +42,31 @@ Open Package Manage Console and go to the directory of the Startup.cs class:
 
 `PM> cd CMS`
 
+Then run these 4 commands one by one:
 
+`PM> dotnet ef migrations add Migration1 --context AppIdentityDbContext`
+
+`PM> dotnet ef database update --context AppIdentityDbContext`
+
+`PM> dotnet ef migrations add Migration2 --context CMSContext`
+
+`PM> dotnet ef database update --context CMSContext`
+
+## Step 3: Create ADMIN User
+
+The ADMIN user will be created in the Identity Database and this user will access the CMS to add, update, delte the pages, blogs, media, menu, etc.
+
+Run your application in Visual Studio (shortcut F5 key) and then open the below URL in your browser to create the Admin user:
+
+`http://localhost:60905/Login/Create`
+
+Change 60905 port to the one your VS sets for this CMS. If you are running this CMS online in a domain then URL will be:
+
+`http://yourdomain.com/Login/Create`
+
+By default the Admin user will be created with the following Credentials:
+
+Username - admin
+password - Secret123$
 
 
