@@ -1,0 +1,580 @@
+﻿body {
+    font-size: 15px;
+    font-family: Verdana;
+    margin: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: #00b9eb;
+    font-size: 12px;
+}
+
+    a:hover {
+        color: #cccff5;
+    }
+
+#adminBar, #mainFooter {
+    background: #23282d;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 5px 0;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+#leftMenu {
+    background: #23282d;
+}
+
+/*Menu*/
+#nav {
+    list-style: none outside none;
+    padding: 0px;
+    width: 30%;
+}
+
+    #nav > li {
+        padding-left: 35px;
+        padding-top: 7px;
+        padding-bottom: 20px;
+        position: relative;
+    }
+
+    #nav li.pageIcon {
+        background: url("../images/page-icon.png") no-repeat;
+    }
+
+    #nav li.mediaIcon {
+        background: url("../images/media-icon.png") no-repeat;
+    }
+
+    #nav li.blogIcon {
+        background: url("../images/blog-icon.svg") no-repeat;
+    }
+
+    #nav li.courseIcon {
+        background: url("../images/course-icon.png") no-repeat;
+    }
+
+    #nav li.siteIcon {
+        background: url("../images/site-icon.png") no-repeat;
+    }
+
+    #nav li.accountIcon {
+        background: url("../images/account-icon.png") no-repeat;
+    }
+
+    /* main level link */
+    #nav a {
+        color: #FFFFFF;
+        cursor: pointer;
+    }
+
+        #nav a:hover {
+            color: #00b9eb;
+        }
+
+    /* dropdown */
+    #nav li:hover > ul {
+        display: block;
+    }
+
+    #nav ul {
+        display: none;
+        margin: 0;
+        padding: 0;
+        width: 185px;
+        position: absolute;
+        top: 5px;
+        left: 90px;
+        background: #333;
+        list-style: none outside none;
+    }
+
+        #nav ul li {
+            padding: 5px;
+        }
+/*End*/
+
+/*Common*/
+input[type="text"] {
+    color: #32373c;
+}
+
+button {
+    background: #f7f7f7 none repeat scroll 0 0;
+    border-color: #ccc;
+    color: #555;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    height: 28px;
+    line-height: 24px;
+    padding: 0 10px 1px;
+}
+
+    button:hover {
+        background: #fafafa none repeat scroll 0 0;
+        border-color: #999;
+    }
+
+select {
+    padding: 5px;
+    color: #32373c;
+    margin-right: 5px;
+}
+
+.pagingDiv {
+    background: #f2f2f2;
+}
+
+.paging {
+    display: inline-block;
+    padding: 0px 9px;
+    margin-right: 4px;
+    border-radius: 3px;
+    border: solid 1px #c0c0c0;
+    background: #e9e9e9;
+    box-shadow: inset 0px 1px 0px rgba(255,255,255, .8), 0px 1px 3px rgba(0,0,0, .1);
+    font-size: .875em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #717171;
+    text-shadow: 0px 1px 0px rgba(255,255,255, 1);
+}
+
+    .paging:hover, .paging.gradient:hover {
+        background: #fefefe;
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE), to(#f0f0f0));
+        background: -moz-linear-gradient(0% 0% 270deg,#FEFEFE, #f0f0f0);
+    }
+
+    .paging.active {
+        border: none;
+        background: #616161;
+        box-shadow: inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .8);
+        color: #f0f0f0;
+        text-shadow: 0px 0px 3px rgba(0,0,0, .5);
+    }
+
+.fontWeightBold {
+    font-weight: bold;
+}
+
+.textAlignCenter {
+    text-align: center;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+/*End*/
+
+.validation-summary-errors {
+    color: #FF0000;
+}
+
+#content {
+    background: #f1f1f1;
+}
+
+    #content form label {
+        text-transform: capitalize;
+    }
+
+#contentFull {
+    background: #f1f1f1;
+    width: 100%;
+}
+
+    #contentFull article {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+        #contentFull article .control span {
+            display: block;
+        }
+
+h1 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic;
+    color: #FF0000;
+}
+
+.control label, .control input, .control textarea, .lineControl label, .lineControl input {
+    color: #777;
+}
+
+.control label {
+    display: block;
+}
+
+.control .text-box, .control textarea {
+    width: 90%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.control textarea {
+    height: 200px;
+}
+
+.control .primaryImage {
+    position: relative;
+}
+
+    .control .primaryImage img {
+        cursor: pointer;
+    }
+
+    .control .primaryImage #crossImg {
+        position: absolute;
+        top: 10px;
+    }
+
+.lineControl .text-box {
+    width: 25%;
+}
+
+.control span, .lineControl span {
+    color: #FF0000;
+    font-size: 10px;
+}
+
+.control, .lineControl {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.h1NewPage {
+    background: #e0e0e0 none repeat scroll 0 0;
+    font-size: 13px;
+    margin-left: 4px;
+    padding: 4px 8px;
+    color: #00b9eb;
+}
+
+    .h1NewPage:hover {
+        background: #00a0d2 none repeat scroll 0 0;
+        color: #fff;
+    }
+
+#infoDiv .pageTypeDiv, #workDiv .bulkDiv {
+    float: left;
+    width: 50%;
+}
+
+    #infoDiv .pageTypeDiv ul {
+        list-style: none outside none;
+        margin: 0px;
+        padding: 0px;
+    }
+
+        #infoDiv .pageTypeDiv ul li {
+            float: left;
+            border-right: 1px solid #333333;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+            #infoDiv .pageTypeDiv ul li a {
+                color: #00b9eb;
+                font-size: 15px;
+            }
+
+                #infoDiv .pageTypeDiv ul li a span {
+                    color: #999;
+                    font-weight: 400;
+                    margin-left: 3px;
+                    font-size: 12px;
+                }
+
+#infoDiv .pageSearchDiv, #workDiv .pagingDiv {
+    float: right;
+    width: 30%;
+}
+
+    #infoDiv .pageSearchDiv input[type="text"] {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 200px;
+    }
+
+#workDiv {
+    padding-top: 10px;
+}
+
+#pageDiv {
+    clear: both;
+    padding-top: 5px;
+}
+
+table {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-collapse: collapse;
+}
+
+    table tr th {
+        color: #00b9eb;
+        font-weight: 400;
+    }
+
+    table td {
+        padding-top: 5px;
+    }
+
+    table thead {
+        border-bottom: 1px solid #CCCCCC;
+    }
+
+    table a {
+        border-right: 1px solid #333333;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    table tbody tr {
+        height: 65px;
+    }
+
+/*Media*/
+#mediaItem {
+    background-color: #FFFFFF;
+    margin-top: 10px;
+}
+
+    #mediaItem .item {
+        border-bottom: 1px solid #cccccc;
+        display: inline-block;
+        width: 100%;
+    }
+
+        #mediaItem .item div {
+            width: 60%;
+            float: left;
+            padding-left: 10px;
+        }
+
+            #mediaItem .item div span {
+                line-height: 35px;
+            }
+
+        #mediaItem .item img {
+            float: left;
+        }
+
+        #mediaItem .item a {
+            line-height: 35px;
+            float: right;
+            padding-right: 10px;
+        }
+
+#mediaLeft {
+}
+
+    #mediaLeft img {
+        max-width: 100%;
+    }
+
+#mediaRight {
+}
+
+    #mediaRight p {
+        clear: both;
+    }
+
+    #mediaRight > p > b {
+        float: left;
+    }
+
+    #mediaRight > p > input {
+        float: left;
+        display: block;
+        padding: 0 0 10px 10px;
+        text-align: left;
+        font-weight: 400;
+    }
+
+    #mediaRight .control {
+        width: 90%;
+        clear: both;
+    }
+
+        #mediaRight .control label {
+            display: inline;
+        }
+
+        #mediaRight .control input, #mediaRight .control textarea, #mediaRight .control textarea {
+            float: right;
+            width: 80%;
+            padding-bottom: 5px;
+            padding-top: 5px;
+        }
+
+        #mediaRight .control select {
+            margin-left: 24px;
+        }
+
+    #mediaRight input.label {
+        background: #f1f1f1 none repeat scroll 0 0;
+        border: medium none;
+        font-size: 15px;
+    }
+
+.mediaToolbar {
+    padding: 10px;
+    background-color: #FFFFFF;
+}
+
+    .mediaToolbar .bulkDiv {
+        float: left;
+        width: 55%;
+    }
+
+        .mediaToolbar .bulkDiv .second {
+            display: none;
+        }
+
+            .mediaToolbar .bulkDiv .second #deleteButton:disabled {
+                color: #ccc;
+            }
+
+    .mediaToolbar .search input {
+        padding-bottom: 5px;
+        padding-top: 5px;
+        width: 200px;
+    }
+
+#allMedia {
+    display: inline-block;
+    width: 100%;
+    padding: 0px;
+    list-style: none outside none;
+}
+
+    #allMedia li {
+        padding: 8px;
+        float: left;
+        width: 135px;
+        height: 135px;
+        overflow: hidden;
+    }
+
+        #allMedia li.selected {
+            border: solid 2px #00b9eb;
+        }
+
+        #allMedia li input[type="checkbox"] {
+            position: absolute;
+        }
+
+/*Jquery Popup*/
+#modal {
+    width: 600px;
+    padding: 8px;
+    background: url( "../images/translucent.png" ) repeat rgba(0,0,0,.3);
+    border-radius: 8px;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: auto;
+    margin: auto;
+}
+
+#modalImage {
+    visibility: hidden;
+    padding: 8px;
+    background: url( "../images/translucent.png" ) repeat;
+    background: rgba(0,0,0,.3);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    position: fixed !important;
+    top: 30% !important;
+    left: 50% !important;
+    margin-top: -94px !important;
+    margin-left: -220px !important;
+    z-index: 101;
+}
+
+#heading {
+    background: -moz-linear-gradient(center top, #F9F9F9, #E9E9E9);
+    background: -webkit-linear-gradient(top, #F9F9F9, #E9E9E9);
+    background-color: #F9F9F9;
+    border-bottom: 1px solid #BABABA;
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 -1px 0 #FFFFFF inset, 0 1px 3px rgba(0, 0, 0, 0.08);
+    color: #444444;
+    font-size: 14px;
+    font-weight: bold; /*height: 44px;*/
+    line-height: 25px;
+    text-align: center;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.reveal-modal-bg {
+    position: fixed;
+    height: 100%;
+    width: 100%; /*background: rgba(0,0,0,.4);*/
+    background: url( "../images/translucent.png" ) repeat;
+    z-index: 100;
+    display: none;
+    top: 0;
+    left: 0;
+}
+
+.button.brown {
+    background-color: #2E1700;
+    background: -moz-linear-gradient(center top, #2E1700 0%, #2E1700 90%, #2E1700 95%, #2E1700 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: -webkit-linear-gradient(top, #2E1700, #2E1700);
+    border: 1px solid #B0333E;
+    margin: 5px 35px 0 35px;
+}
+
+.button.red {
+    background: -moz-linear-gradient(center top, #F87288 0%, #F34755 90%, #E1414D 95%, #CE3B46 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: -webkit-linear-gradient(top, #F87288, #F34755);
+    border: 1px solid #B0333E;
+    margin: 0 35px 0 5px;
+}
+
+a.button {
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: #FFFFFF;
+    float: left;
+    font-size: 13px;
+    font-weight: bold;
+    height: 33px;
+    line-height: 33px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    width: 138px;
+    text-align: center;
+    cursor: pointer;
+}
+
+a.close {
+    position: absolute;
+    margin-top: -25px;
+    margin-left: 575px;
+    cursor: pointer;
+}
+/*End*/
+
+#mainFooter {
+}
