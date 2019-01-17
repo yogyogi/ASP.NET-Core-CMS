@@ -1,0 +1,1670 @@
+﻿body {
+    margin: 0;
+}
+
+#wrapper {
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+header, footer {
+    background: #961919;
+    height: 80px;
+}
+
+    header span {
+        color: #F1DE91;
+        font-size: 50px;
+        padding: 0 100px;
+        position: absolute;
+    }
+
+    footer p {
+        text-align: center;
+        color: #F1DE91;
+        font-size: 30px;
+        padding-top: 20px;
+    }
+
+#content {
+    width: 85%;
+    padding: 10px;
+    margin: auto;
+    font-family: open-sans, sans-serif;
+}
+
+.courseList h1, .course h1 {
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+    .courseList h1 span, .course h1 span {
+        border-bottom: solid #cec8c8 5px;
+        width: 28%;
+        margin-top: -25px;
+        color: #FFF;
+    }
+
+        .courseList h1 span.left, .course h1 span.left {
+            float: left;
+        }
+
+        .courseList h1 span.right, .course h1 span.right {
+            float: right;
+        }
+
+.courseList .courseName, .courseList .coursePrice {
+    font-weight: bold;
+    color: #BB2323;
+    font-size: 20px;
+}
+
+.pagingDiv {
+    background: #f2f2f2;
+}
+
+.course {
+}
+
+    .course h1 {
+        color: #720000;
+    }
+
+    .course .description {
+        box-shadow: 5px 5px 8px #888888;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #DCDCDC;
+        background-color: #FFFFFF;
+        border-radius: 10px;
+        margin: 15px;
+        overflow: auto;
+    }
+
+    /*Timer*/
+    .course .timerDiv {
+        background-color: #2B303A;
+        padding: 30px 0 80px 0;
+    }
+
+        .course .timerDiv h2 {
+            font-family: ubuntu, sans-serif;
+            font-size: 35px;
+            color: #FFF;
+            text-align: center;
+            padding: 20px;
+        }
+
+            .course .timerDiv h2 span {
+                color: #F1DE91;
+                font-weight: bold;
+            }
+
+        .course .timerDiv .rectangle {
+            border: solid 3px #720000;
+            display: inline-block;
+            width: 80%;
+            margin: 0 10%;
+            position: relative;
+        }
+
+            .course .timerDiv .rectangle > .top {
+                width: 30%;
+                margin: auto;
+                background-color: #2B303A;
+                color: #2B303A;
+                margin-top: -5px;
+            }
+
+            .course .timerDiv .rectangle > .bottom {
+                background-color: #FFF;
+                color: #720000;
+                padding: 20px;
+                font-family: ubuntu, sans-serif;
+                font-weight: bold;
+                font-size: 25px;
+                position: absolute;
+                bottom: -50px;
+                width: 37%;
+                left: 31%;
+                text-align: center;
+                cursor: pointer;
+            }
+
+                .course .timerDiv .rectangle > .bottom:hover {
+                    background-color: #720000;
+                    color: #FFF;
+                    transition-duration: 1s;
+                    transition-delay: 0s;
+                    transition-timing-function: ease;
+                }
+
+            .course .timerDiv .rectangle .timeContainer {
+                margin: auto;
+                width: 70%;
+            }
+
+                .course .timerDiv .rectangle .timeContainer .time {
+                    float: left;
+                    width: 20%;
+                    margin: 100px 0 100px 4%;
+                }
+
+                    .course .timerDiv .rectangle .timeContainer .time p {
+                        border: solid 8px #FA1716;
+                        text-align: center;
+                        border-radius: 50%;
+                        height: 140px;
+                        padding-top: 5px;
+                    }
+
+                        .course .timerDiv .rectangle .timeContainer .time p span {
+                            color: #FFF;
+                            display: block;
+                            font-weight: bold;
+                            font-size: 23px;
+                        }
+
+                            .course .timerDiv .rectangle .timeContainer .time p span:first-child {
+                                font-size: 40px;
+                            }
+/*End*/
+/*Modal*/
+.modal-lg {
+    max-width: 80%;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-content {
+    border-radius: 15px;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+    .modal-header .close {
+        margin: -3.5rem -5rem -1rem auto;
+    }
+
+.modal-title {
+    color: #720000;
+    text-align: center;
+    font-family: ubuntu, sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    padding-left: 28%;
+}
+
+.modal-body .item {
+    border: solid 2px #DCDCDC;
+    border-radius: 10px;
+    padding: 17px;
+    text-align: left;
+}
+
+    .modal-body .item:hover {
+        border: solid 2px #720000;
+    }
+
+    .modal-body .item h5 {
+        color: #000;
+        font-family: ubuntu, sans-serif;
+        font-weight: bold;
+    }
+
+    .modal-body .item p {
+        color: #000;
+        padding-top: 15px;
+    }
+
+    .modal-body .item .price {
+        color: #BB2323;
+        font-weight: bold;
+        font-size: 25px;
+        margin-bottom: 35px;
+    }
+
+    .modal-body .item .payment {
+        text-align: center;
+        font-size: 22px;
+    }
+
+        .modal-body .item .payment a {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            .modal-body .item .payment a:hover {
+                background-color: #720000;
+                transition-duration: 1s;
+                transition-delay: 0s;
+                transition-timing-function: ease;
+            }
+
+    .modal-body .item a {
+        color: #FFF;
+        background-color: #FF3232;
+        padding: 10px 30px;
+    }
+/*End*/
+/*div1*/
+.course .div1 {
+    padding: 30px 0;
+    width: 80%;
+    margin: auto;
+    display: grid;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div1 h2 {
+        color: #8b0000;
+        text-align: center;
+        font-weight: bold;
+        font-size: 60px;
+        font-feature-settings: "liga";
+    }
+
+    .course .div1 h3 {
+        text-align: center;
+        color: #bb2323;
+        font-family: ubuntu, sans-serif;
+        font-feature-settings: "liga";
+        font-size: 24px;
+    }
+
+    .course .div1 .twoCol {
+        padding-top: 70px;
+    }
+
+        .course .div1 .twoCol .one {
+            width: 60%;
+            float: left;
+        }
+
+            .course .div1 .twoCol .one ul {
+                list-style: none;
+            }
+
+                .course .div1 .twoCol .one ul li::before {
+                    content: "• ";
+                    color: #bb2323;
+                }
+
+        .course .div1 .twoCol .two {
+            width: 35%;
+            float: right;
+        }
+
+            .course .div1 .twoCol .two img {
+                width: 100%;
+            }
+/*End*/
+/*div2*/
+.course .div2 {
+    padding: 30px 0;
+    background-color: #EDEDED;
+    display: grid;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div2 .inner {
+        width: 80%;
+        margin: auto;
+    }
+
+        .course .div2 .inner h2 {
+            Color: #bb2323;
+            font-family: ubuntu, sans-serif;
+            font-feature-settings: "liga";
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .course .div2 .inner .twoCol {
+            padding-top: 70px;
+        }
+
+            .course .div2 .inner .twoCol .one {
+                width: 53%;
+                float: left;
+            }
+
+                .course .div2 .inner .twoCol .one img {
+                    width: 100%;
+                }
+
+            .course .div2 .inner .twoCol .two {
+                width: 45%;
+                float: right;
+            }
+
+                .course .div2 .inner .twoCol .two ul {
+                    list-style: none;
+                }
+
+                    .course .div2 .inner .twoCol .two ul li::before {
+                        content: "• ";
+                        color: #bb2323;
+                    }
+/*End*/
+/*div3*/
+.course .div3 {
+    padding: 50px 0 100px 0;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div3 .rectangle {
+        border: solid 3px #720000;
+        display: inline-block;
+        width: 80%;
+        margin: 0 10%;
+        position: relative;
+    }
+
+        .course .div3 .rectangle > .top {
+            width: 90%;
+            margin: auto;
+            background-color: #FFF;
+            color: #720000;
+            font-size: 38px;
+            margin-top: -25px;
+            padding-left: 110px;
+            font-weight: bold;
+        }
+
+        .course .div3 .rectangle ul {
+            width: 70%;
+            margin: auto;
+            font-size: 28px;
+            padding: 50px 0 100px 0;
+        }
+
+        .course .div3 .rectangle > .bottom {
+            background-color: #FFF;
+            border: solid 3px #720000;
+            color: #720000;
+            padding: 20px;
+            font-family: ubuntu, sans-serif;
+            font-weight: bold;
+            font-size: 25px;
+            position: absolute;
+            bottom: -50px;
+            width: 40%;
+            left: 31%;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .course .div3 .rectangle > .bottom:hover {
+                background-color: #720000;
+                color: #FFF;
+                transition-duration: 1s;
+                transition-delay: 0s;
+                transition-timing-function: ease;
+            }
+/*End*/
+/*div4*/
+.course .div4 {
+    padding: 30px 0;
+    background-color: #EDEDED;
+    display: grid;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div4 .inner {
+        width: 80%;
+        margin: auto;
+    }
+
+        .course .div4 .inner h2 {
+            Color: #720000;
+            font-family: ubuntu, sans-serif;
+            font-feature-settings: "liga";
+            font-size: 35px;
+            text-align: center;
+        }
+
+        .course .div4 .inner .box {
+            background-color: #FFF;
+            padding: 20px;
+            font-size: 28px;
+            box-shadow: 0px 0px 6px rgba(112,128,144,0.32), 0px 0px 6px rgba(112,128,144,0.32);
+            margin: 45px 0;
+            border-radius: 10px;
+        }
+
+        .course .div4 .inner p {
+            font-size: 25px;
+        }
+
+        .course .div4 .inner ul {
+            list-style: none;
+            font-size: 25px;
+        }
+
+            .course .div4 .inner ul li::before {
+                content: "• ";
+                color: #bb2323;
+            }
+/*End*/
+/*div5*/
+.course .div5 {
+    padding: 30px 0 80px 0;
+    width: 80%;
+    margin: auto;
+    display: grid;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div5 h2 {
+        color: #8b0000;
+        text-align: center;
+        font-weight: bold;
+        font-size: 50px;
+        font-feature-settings: "liga";
+    }
+
+    .course .div5 h3 {
+        color: #8b0000;
+        text-align: center;
+        font-weight: bold;
+        font-feature-settings: "liga";
+        font-size: 35px;
+    }
+
+    .course .div5 .inner {
+        padding: 20px 0;
+    }
+
+        .course .div5 .inner .box {
+            width: 48%;
+            float: left;
+            border: solid 2px #FA1716;
+            margin: 1%;
+            height: 400px;
+        }
+
+            .course .div5 .inner .box:hover {
+                border: solid 2px #8b0000;
+            }
+
+            .course .div5 .inner .box .head {
+                text-align: center;
+                background-color: #FA1716;
+            }
+
+            .course .div5 .inner .box:hover .head {
+                background-color: #8b0000;
+                transition-duration: 1s;
+                transition-delay: 0s;
+                transition-timing-function: ease;
+            }
+
+            .course .div5 .inner .box .head .first {
+                padding: 6px 0;
+                color: #DCDCDC;
+                font-size: 25px;
+            }
+
+            .course .div5 .inner .box .head .second {
+                padding: 6px 0;
+                font-size: 35px;
+                font-weight: bold;
+                color: #FFF;
+            }
+
+            .course .div5 .inner .box .body ul {
+                list-style: none;
+            }
+
+                .course .div5 .inner .box .body ul li {
+                    padding: 5px;
+                }
+
+                    .course .div5 .inner .box .body ul li::before {
+                        content: "• ";
+                        color: #bb2323;
+                        margin-left: -12px;
+                    }
+
+    .course .div5 .twoCol {
+        position: relative;
+        padding: 40px 0 80px 0;
+    }
+
+        .course .div5 .twoCol .one {
+            width: 60%;
+            float: left;
+        }
+
+            .course .div5 .twoCol .one ul {
+                list-style: none;
+                color: #708090;
+                padding-left: 5px;
+                font-size: 18px;
+            }
+
+            .course .div5 .twoCol .one li {
+            }
+
+            .course .div5 .twoCol .one p {
+                font-size: 25px;
+                font-weight: bold;
+                padding-left: 20px;
+            }
+
+        .course .div5 .twoCol .two {
+            width: 35%;
+            float: right;
+        }
+
+            .course .div5 .twoCol .two img {
+                width: 98%;
+            }
+
+        .course .div5 .twoCol > .bottom {
+            background-color: #FFF;
+            border: solid 3px #720000;
+            color: #720000;
+            padding: 20px;
+            font-family: ubuntu, sans-serif;
+            font-weight: bold;
+            font-size: 25px;
+            position: absolute;
+            bottom: -50px;
+            width: 40%;
+            left: 31%;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .course .div5 .twoCol > .bottom:hover {
+                background-color: #720000;
+                color: #FFF;
+                transition-duration: 1s;
+                transition-delay: 0s;
+                transition-timing-function: ease;
+            }
+/*End*/
+/*div6*/
+.course .div6 {
+    padding: 30px 0;
+    background-color: #EDEDED;
+    display: grid;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div6 .inner {
+        width: 80%;
+        margin: auto;
+    }
+
+        .course .div6 .inner h2 {
+            color: #8b0000;
+            font-family: ubuntu, sans-serif;
+            font-feature-settings: "liga";
+            font-size: 35px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+            .course .div6 .inner h2 span {
+                color: #bb2323;
+            }
+
+        .course .div6 .inner .threeCols {
+            padding: 50px 0 20px 0;
+            display: flex;
+        }
+
+            .course .div6 .inner .threeCols .col {
+                border-color: #DCDCDC;
+                background-color: #F6F3EC;
+                width: 30%;
+                margin: 0 1.5%;
+                float: left;
+                height: 150px;
+                border-radius: 5px;
+            }
+
+                .course .div6 .inner .threeCols .col .reclamesjablonen {
+                    background: url("/Upload/2018/7/Reclamesjablonen.png") no-repeat center;
+                    width: 100%;
+                    height: 100%;
+                    background-size: 120px 120px;
+                }
+
+                    .course .div6 .inner .threeCols .col .reclamesjablonen:hover {
+                        background: url("/Upload/2018/7/Reclamesjablonen1.png") no-repeat center;
+                        width: 100%;
+                        height: 100%;
+                        background-size: 120px 120px;
+                        transition-duration: 1s;
+                        transition-delay: 0s;
+                        transition-timing-function: ease;
+                    }
+
+                .course .div6 .inner .threeCols .col .verkoopscript {
+                    background: url("/Upload/2018/7/Verkoopscript.png") no-repeat center;
+                    width: 100%;
+                    height: 100%;
+                    background-size: 120px 120px;
+                }
+
+                    .course .div6 .inner .threeCols .col .verkoopscript:hover {
+                        background: url("/Upload/2018/7/Verkoopscript1.png") no-repeat center;
+                        width: 100%;
+                        height: 100%;
+                        background-size: 120px 120px;
+                        transition-duration: 1s;
+                        transition-delay: 0s;
+                        transition-timing-function: ease;
+                    }
+
+
+                .course .div6 .inner .threeCols .col .instructie {
+                    background: url("/Upload/2018/7/instructie.png") no-repeat center;
+                    width: 100%;
+                    height: 100%;
+                    background-size: 120px 120px;
+                }
+
+                    .course .div6 .inner .threeCols .col .instructie:hover {
+                        background: url("/Upload/2018/7/instructie1.png") no-repeat center;
+                        width: 100%;
+                        height: 100%;
+                        background-size: 120px 120px;
+                        transition-duration: 1s;
+                        transition-delay: 0s;
+                        transition-timing-function: ease;
+                    }
+
+        .course .div6 .inner .full {
+            border-color: #DCDCDC;
+            background-color: #F6F3EC;
+            border-radius: 5px;
+            display: flex;
+            width: 97%;
+            margin-left: 14px;
+            padding-top: 15px;
+        }
+
+            .course .div6 .inner .full .col {
+                width: 30%;
+                margin: 0 1.5%;
+                float: left;
+            }
+
+                .course .div6 .inner .full .col span {
+                    font-family: ubuntu, sans-serif;
+                    font-feature-settings: "liga";
+                    font-size: 18px;
+                    color: #000;
+                }
+
+                .course .div6 .inner .full .col p {
+                    color: #7F7F7F;
+                    font-family: ubuntu, sans-serif;
+                    font-feature-settings: "liga";
+                    font-size: 18px;
+                }
+/*End*/
+/*div7*/
+.course .div7 {
+    padding: 30px 0;
+    display: grid;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div7 .inner {
+        width: 80%;
+        margin: auto;
+    }
+
+        .course .div7 .inner h2 {
+            color: #8b0000;
+            text-align: center;
+            font-family: ubuntu, sans-serif;
+            font-feature-settings: "liga";
+            font-size: 50px;
+        }
+
+        .course .div7 .inner p {
+            color: #7F7F7F;
+            font-family: ubuntu, sans-serif;
+            font-feature-settings: "liga";
+            font-size: 26px
+        }
+
+            .course .div7 .inner p span {
+                color: #000;
+            }
+/*End*/
+/*div8*/
+.course .div8 {
+    padding: 30px 0;
+    display: grid;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div8 .inner {
+        width: 80%;
+        margin: auto;
+        padding: 50px 0;
+    }
+
+        .course .div8 .inner .left {
+            float: left;
+            margin-right: 10%;
+            width: 30%;
+            background: url("/Upload/2018/7/alsu-rachmatoellina.jpg") no-repeat center;
+            height: 340px;
+            border-radius: 10px;
+            border-style: solid;
+            border-color: #BB2323;
+            border-width: 0px 4px 4px 0px;
+        }
+
+        .course .div8 .inner .right {
+            float: left;
+            width: 60%;
+        }
+
+            .course .div8 .inner .right img {
+                padding-left: 90px;
+            }
+
+            .course .div8 .inner .right h2 {
+                color: #8b0000;
+                font-family: ubuntu, sans-serif;
+                font-feature-settings: "liga";
+                font-size: 46px;
+            }
+
+            .course .div8 .inner .right ul {
+                padding-left: 16px;
+                list-style: none;
+                font-family: ubuntu, sans-serif;
+                font-feature-settings: "liga";
+                font-size: 24px;
+            }
+
+                .course .div8 .inner .right ul li::before {
+                    content: "• ";
+                    color: #bb2323;
+                    margin-left: -12px;
+                }
+
+            .course .div8 .inner .right p {
+                color: #8b0000;
+                font-weight: bold;
+                font-family: ubuntu, sans-serif;
+                font-feature-settings: "liga";
+                font-size: 28px;
+                font-style: italic;
+            }
+/*End*/
+/*div9*/
+.course .div9 {
+    padding: 30px 0;
+    display: grid;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div9 .image {
+        margin: auto;
+        border-radius: 50%;
+        border: solid 3px #D1AD52;
+        width: 150px;
+        height: 150px;
+        background: url("/Upload/2018/7/money-house.jpg") no-repeat center;
+    }
+
+    .course .div9 h2 {
+        text-align: center;
+        font-size: 48px;
+        padding: 35px 0;
+    }
+
+    .course .div9 .threeCols {
+    }
+
+        .course .div9 .threeCols .col {
+            background-color: #EDEDED;
+            border-radius: 15px;
+            padding: 20px;
+            float: left;
+            width: 30%;
+            margin-left: 2.5%;
+            text-align: center;
+            height: 235px;
+        }
+
+            .course .div9 .threeCols .col:hover {
+                background-color: #8A2BE2;
+                transition-duration: 2s;
+                transition-delay: 0s;
+                transition-timing-function: ease-in-out;
+            }
+
+                .course .div9 .threeCols .col:hover span, .course .div9 .threeCols .col:hover p {
+                    color: #FFF;
+                }
+
+            .course .div9 .threeCols .col span {
+                color: #8A2BE2;
+                font-weight: 600;
+                font-size: 22px;
+            }
+
+            .course .div9 .threeCols .col p {
+                color: #9455CF;
+                font-size: 18px;
+                font-weight: 400;
+                padding-top: 20px;
+                text-align: left;
+            }
+
+    .course .div9 .popupButton {
+        padding: 40px 0;
+    }
+
+        .course .div9 .popupButton .bottom {
+            border: solid 3px #FFF;
+            color: #FFF;
+            font-family: ubuntu, sans-serif;
+            font-weight: bold;
+            font-size: 25px;
+            width: 45%;
+            padding: 15px 5px;
+            margin: auto;
+            text-align: center;
+            cursor: pointer;
+            background-color: #8A2BE2;
+            border-radius: 5px;
+        }
+
+            .course .div9 .popupButton .bottom:hover {
+                background-color: #40106D;
+                color: #FFF;
+                transition-duration: 1s;
+                transition-delay: 0s;
+                transition-timing-function: ease;
+            }
+/*End*/
+/*div10*/
+.course .div10 {
+    padding: 30px 0;
+    display: grid;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div10 .inner {
+        margin: 0 24px;
+        background-color: #F5F5F5;
+        border: 2px solid #CA90FF;
+        text-align: center;
+        padding-bottom: 60px;
+    }
+
+        .course .div10 .inner .top {
+            color: #8A2BE2;
+            font-size: 48px;
+            border: 2px solid #CA90FF;
+            padding: 5px 10px;
+            width: 50%;
+            margin: -44px auto;
+            background-color: #FFF;
+            font-weight: bold;
+        }
+
+        .course .div10 .inner .arrow {
+            margin: auto;
+            width: 25%;
+            padding: 70px 0;
+        }
+
+            .course .div10 .inner .arrow .left {
+                background: url("/Upload/2018/7/dl2.png") no-repeat center;
+                padding: 40px;
+                float: left;
+            }
+
+                .course .div10 .inner .arrow .left:hover {
+                    background: url("/Upload/2018/7/dl1.png") no-repeat center;
+                    padding: 40px;
+                }
+
+            .course .div10 .inner .arrow .right {
+                background: url("/Upload/2018/7/dr2.png") no-repeat center;
+                padding: 40px;
+                float: right;
+            }
+
+                .course .div10 .inner .arrow .right:hover {
+                    background: url("/Upload/2018/7/dr1.png") no-repeat center;
+                    padding: 40px;
+                }
+
+        .course .div10 .inner .twoCols {
+            width: 90%;
+            display: flex;
+            margin: auto;
+            padding: 30px 0;
+        }
+
+            .course .div10 .inner .twoCols .first {
+                float: left;
+                width: 43%;
+                padding-left: 5%;
+            }
+
+            .course .div10 .inner .twoCols .second {
+                float: right;
+                width: 48%;
+                padding-left: 15%;
+            }
+
+            .course .div10 .inner .twoCols img {
+                float: left;
+            }
+
+            .course .div10 .inner .twoCols p {
+                font-size: 23px;
+                font-weight: 400;
+                text-align: left;
+                padding-left: 85px;
+            }
+
+        .course .div10 .inner h4 {
+            font-size: 46px;
+            color: #40106D;
+            font-weight: 700;
+        }
+
+        .course .div10 .inner .numbers {
+            padding: 50px 0;
+        }
+
+        .course .div10 .inner .fourCols {
+            padding: 50px 0;
+            display: inline-block;
+            width: 100%;
+        }
+
+            .course .div10 .inner .fourCols .col {
+                float: left;
+                width: 21%;
+                border-style: solid;
+                border-color: #9455CF;
+                border-width: 20px 0 0 0;
+                margin: 0 0 0 3.2%;
+                padding: 35px 10px;
+                font-size: 18px;
+                text-align: left;
+                background-color: #EDEDED;
+                height: 235px;
+            }
+
+                .course .div10 .inner .fourCols .col:hover {
+                    border-color: #40106D;
+                    border-width: 20px 1px 1px 1px;
+                    transition-duration: 1s;
+                    transition-delay: 0s;
+                    transition-timing-function: ease;
+                }
+
+    .course .div10 .popupButton {
+    }
+
+        .course .div10 .popupButton .bottom {
+            border: solid 3px #FFF;
+            color: #FFF;
+            font-family: ubuntu, sans-serif;
+            font-weight: bold;
+            font-size: 25px;
+            width: 45%;
+            padding: 15px 5px;
+            margin: auto;
+            text-align: center;
+            cursor: pointer;
+            background-color: #8A2BE2;
+            border-radius: 5px;
+        }
+
+            .course .div10 .popupButton .bottom:hover {
+                background-color: #40106D;
+                color: #FFF;
+                transition-duration: 1s;
+                transition-delay: 0s;
+                transition-timing-function: ease;
+            }
+/*End*/
+/*div11*/
+.course .div11 {
+    padding: 30px 0 80px 0;
+    display: grid;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div11 h2 {
+        text-align: center;
+        color: #8A2BE2;
+        font-size: 48px;
+        font-weight: 700;
+    }
+
+    .course .div11 h3 {
+        text-align: center;
+        color: #8A2BE2;
+        font-size: 46px;
+        font-weight: 300;
+    }
+
+    .course .div11 .fourCols {
+        padding-bottom: 50px;
+    }
+
+        .course .div11 .fourCols .col {
+            float: left;
+            width: 23%;
+            margin: 0 1%;
+            text-align: center;
+        }
+
+            .course .div11 .fourCols .col img {
+            }
+
+            .course .div11 .fourCols .col p {
+                color: #000;
+                font-weight: 600;
+            }
+
+    .course .div11 .pm {
+        margin: auto;
+        border: 2px solid #8A2BE2;
+        padding: 0 65px;
+        height: 100px;
+        position: relative;
+    }
+
+        /*.course .div11 .pm h2 {
+            margin-top: -30px;
+            background-color: #FFF;
+        }
+
+        .course .div11 .pm h3 {
+            background-color: #FFF;
+            bottom: -35px;
+            left: 40px;
+            position: absolute;
+            padding: 0 5px;
+        }*/
+
+        .course .div11 .pm h2 {
+            margin-top: -30px;
+            background-color: #FFF;
+            padding: 0 25px;
+        }
+
+        .course .div11 .pm h3 {
+            background-color: #FFF;
+            bottom: -35px;
+            left: 64px;
+            position: absolute;
+            padding: 0 22px;
+            font-size: 42px;
+        }
+
+    .course .div11 .twoCols {
+        width: 90%;
+        margin: auto;
+        padding-top: 90px;
+    }
+
+        .course .div11 .twoCols .left {
+            float: left;
+            margin-right: 10%;
+            width: 30%;
+            background: url("/Upload/2018/7/alsu-rachmatoellina.jpg") no-repeat center;
+            height: 340px;
+            border-radius: 10px;
+            border-style: solid;
+            border-color: #8A2BE2;
+            border-width: 0px 4px 4px 0px;
+        }
+
+        .course .div11 .twoCols .right {
+            float: left;
+            width: 60%;
+        }
+
+            .course .div11 .twoCols .right img {
+                padding-left: 20px;
+            }
+
+            .course .div11 .twoCols .right ul {
+                padding-left: 16px;
+                list-style: none;
+                font-family: ubuntu, sans-serif;
+                font-feature-settings: "liga";
+                font-size: 24px;
+            }
+
+                .course .div11 .twoCols .right ul li::before {
+                    content: "• ";
+                    color: #8A2BE2;
+                    margin-left: -12px;
+                }
+
+            .course .div11 .twoCols .right p {
+                color: #40106D;
+                font-weight: bold;
+                font-family: ubuntu, sans-serif;
+                font-feature-settings: "liga";
+                font-size: 28px;
+                font-style: italic;
+            }
+/*End*/
+/*div12*/
+.course .div12 {
+    padding: 50px 0;
+    display: grid;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div12 .inner {
+        margin: 0 25px;
+        background-color: #F5F5F5;
+        border: 2px solid #CA90FF;
+        text-align: center;
+    }
+
+        .course .div12 .inner .top {
+            color: #8A2BE2;
+            font-size: 52px;
+            border: 2px solid #CA90FF;
+            padding: 5px 10px;
+            width: 95%;
+            margin: -44px auto;
+            background-color: #FFF;
+            font-weight: bold;
+        }
+
+        .course .div12 .inner .threeCols {
+            width: 95%;
+            margin: auto;
+            padding: 90px 0 40px 0;
+            display: flex;
+        }
+
+            .course .div12 .inner .threeCols .cols {
+                float: left;
+                width: 31%;
+                border: solid 2px #40106D;
+                background-color: #FFF;
+            }
+
+                .course .div12 .inner .threeCols .cols .head {
+                    background-color: #40106D;
+                    text-align: center;
+                    font-size: 18px;
+                    color: #F6F3EC;
+                    font-weight: 700;
+                    padding: 15px 23px;
+                }
+
+                .course .div12 .inner .threeCols .cols .body {
+                    text-align: center;
+                    font-size: 18px;
+                    color: #000000;
+                    font-weight: 400;
+                    margin: -16px 0 0 0;
+                    padding: 15px;
+                }
+
+                    .course .div12 .inner .threeCols .cols .body span {
+                        font-weight: bold;
+                        font-size: 22px;
+                    }
+/*End*/
+/*div13*/
+.course .div13 {
+    padding: 50px 0;
+    display: grid;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div13 .video {
+        text-align: center;
+    }
+
+    .course .div13 h2 {
+        font-size: 52px;
+        color: #8A2BE2;
+        font-weight: 500;
+        width: 75%;
+        margin: auto;
+        text-align: center;
+        padding: 50px;
+    }
+
+    .course .div13 .yellowTimerDiv {
+        padding-bottom: 50px;
+    }
+
+        .course .div13 .yellowTimerDiv .rectangle {
+            display: inline-block;
+            width: 80%;
+            margin: 0 10%;
+            position: relative;
+        }
+
+            .course .div13 .yellowTimerDiv .rectangle > .bottom {
+                background-color: #8A2BE2;
+                color: #FFF;
+                padding: 20px;
+                font-family: ubuntu, sans-serif;
+                font-weight: bold;
+                font-size: 25px;
+                position: absolute;
+                width: 50%;
+                left: 26%;
+                text-align: center;
+                cursor: pointer;
+            }
+
+                .course .div13 .yellowTimerDiv .rectangle > .bottom:hover {
+                    background-color: #40106D;
+                    color: #FFF;
+                    transition-duration: 1s;
+                    transition-delay: 0s;
+                    transition-timing-function: ease;
+                }
+
+            .course .div13 .yellowTimerDiv .rectangle .timeContainer {
+                margin: auto;
+                width: 85%;
+                display: flex;
+            }
+
+                .course .div13 .yellowTimerDiv .rectangle .timeContainer .time {
+                    float: left;
+                    width: 20%;
+                    margin: 30px 0 30px 4%;
+                }
+
+                    .course .div13 .yellowTimerDiv .rectangle .timeContainer .time p {
+                        border: solid 12px #facc5b;
+                        text-align: center;
+                        border-radius: 50%;
+                        height: 146px;
+                        padding-top: 5px;
+                    }
+
+                        .course .div13 .yellowTimerDiv .rectangle .timeContainer .time p span {
+                            color: #8b0000;
+                            display: block;
+                            font-weight: bold;
+                            font-size: 23px;
+                        }
+
+                            .course .div13 .yellowTimerDiv .rectangle .timeContainer .time p span:first-child {
+                                font-size: 40px;
+                            }
+
+    .course .div13 .divider {
+        padding: 85px 0 0px 0;
+        text-align: center;
+    }
+
+    .course .div13 .threeCols {
+        width: 95%;
+        margin: auto;
+        padding: 35px 0 40px 0;
+        display: flex;
+    }
+
+        .course .div13 .threeCols .cols {
+            float: left;
+            width: 31%;
+            border: solid 2px #DCDCDC;
+            background-color: #FFF;
+            padding: 15px;
+        }
+
+            .course .div13 .threeCols .cols:hover {
+                border: solid 2px #40106D;
+                transition-duration: 1s;
+                transition-delay: 0s;
+                transition-timing-function: ease;
+            }
+
+                .course .div13 .threeCols .cols:hover h3, .course .div13 .threeCols .cols:hover h3 span {
+                    color: #40106D;
+                    transition-duration: 1s;
+                    transition-delay: 0s;
+                    transition-timing-function: ease;
+                }
+
+            .course .div13 .threeCols .cols h3 {
+                text-align: center;
+                color: #996B8F;
+                font-size: 36px;
+                font-weight: 700;
+            }
+
+                .course .div13 .threeCols .cols h3 span {
+                    color: #40106D;
+                }
+
+            .course .div13 .threeCols .cols p {
+                text-align: center;
+                color: #7F7F7F;
+                padding: 0 50px;
+            }
+
+            .course .div13 .threeCols .cols ul {
+                font-size: 18px;
+                list-style: none;
+            }
+
+                .course .div13 .threeCols .cols ul li::before {
+                    content: "• ";
+                    color: #8A2BE2;
+                    margin-left: -12px;
+                }
+
+            .course .div13 .threeCols .cols .popupButton {
+                text-align: center;
+                padding: 15px;
+            }
+
+                .course .div13 .threeCols .cols .popupButton .bottom {
+                    border: solid 3px #FFF;
+                    color: #FFF;
+                    font-family: ubuntu, sans-serif;
+                    font-weight: bold;
+                    font-size: 25px;
+                    width: 80%;
+                    padding: 15px 0;
+                    margin: auto;
+                    text-align: center;
+                    cursor: pointer;
+                    background-color: #8A2BE2;
+                    border-radius: 5px;
+                }
+
+                    .course .div13 .threeCols .cols .popupButton .bottom:hover {
+                        background-color: #40106D;
+                        color: #FFF;
+                        transition-duration: 1s;
+                        transition-delay: 0s;
+                        transition-timing-function: ease;
+                        text-decoration: none;
+                    }
+/*End*/
+/*div14*/
+.course .div14 {
+    font-family: ubuntu, sans-serif;
+    background-color: #8A2BE2;
+    text-align: center;
+    display: flex;
+    color: #FFF;
+    padding: 10px;
+}
+
+    .course .div14 .left {
+        float: left;
+        width: 50%;
+        font-size: 48px;
+        font-weight: 500;
+    }
+
+    .course .div14 .right {
+        float: right;
+        width: 50%;
+        font-size: 22px;
+        font-weight: 400;
+    }
+
+        .course .div14 .right span {
+            font-weight: 800;
+        }
+/*End*/
+/*div15*/
+.course .div15 {
+    padding: 40px 0 30px 0;
+    font-family: ubuntu, sans-serif;
+}
+
+    .course .div15 h2 {
+        text-align: center;
+        color: #8A2BE2;
+        font-size: 50px;
+        font-weight: 700;
+    }
+
+    .course .div15 h3 {
+        text-align: center;
+        font-size: 26px;
+        font-weight: 300;
+        color: #8A2BE2;
+        padding: 20px;
+    }
+
+    .course .div15 .form {
+        margin: auto;
+        width: 60%;
+    }
+
+        .course .div15 .form .twoCols {
+            display: flex;
+        }
+
+            .course .div15 .form .twoCols .cols {
+                float: left;
+                width: 50%;
+                padding: 0 1%;
+            }
+
+                .course .div15 .form .twoCols .cols input {
+                    border: solid 1px #C4C4C4;
+                    border-radius: 2px;
+                    padding: 5px;
+                    width: 100%;
+                }
+
+                .course .div15 .form .twoCols .cols input {
+                    border: solid 1px #8A2BE2;
+                }
+
+        .course .div15 .form .button {
+            border: solid 3px #FFF;
+            color: #FFF;
+            font-family: ubuntu, sans-serif;
+            font-weight: bold;
+            font-size: 25px;
+            width: 99%;
+            padding: 15px 5px;
+            margin: auto;
+            text-align: center;
+            cursor: pointer;
+            background-color: #8A2BE2;
+            border-radius: 5px;
+            margin-top: 25px;
+        }
+
+            .course .div15 .form .button:hover {
+                background-color: #40106D;
+                color: #FFF;
+                transition-duration: 1s;
+                transition-delay: 0s;
+                transition-timing-function: ease;
+            }
+/*End*/
+/*Modal*/
+.onlinemarathon .modal-title {
+    color: #8A2BE2;
+    text-align: center;
+    font-family: ubuntu, sans-serif;
+    font-size: 52px;
+    font-weight: bold;
+    padding-left: 18%;
+}
+
+.onlinemarathon .modal-body .item {
+    border: solid 2px #DCDCDC;
+    border-radius: 10px;
+    padding: 17px;
+    text-align: left;
+}
+
+    .onlinemarathon .modal-body .item:hover {
+        border: solid 2px #40106D;
+        transition-duration: 1s;
+        transition-delay: 0s;
+        transition-timing-function: ease;
+    }
+
+        .onlinemarathon .modal-body .item:hover:hover h3, .onlinemarathon .modal-body .item:hover:hover h3 span {
+            color: #40106D;
+            transition-duration: 1s;
+            transition-delay: 0s;
+            transition-timing-function: ease;
+        }
+
+    .onlinemarathon .modal-body .item h3 {
+        text-align: center;
+        color: #996B8F;
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+        .onlinemarathon .modal-body .item h3 span {
+            color: #40106D;
+        }
+
+    .onlinemarathon .modal-body .item p {
+        padding-top: 15px;
+        color: #7F7F7F;
+    }
+
+    .onlinemarathon .modal-body .item ul {
+        font-size: 18px;
+        list-style: none;
+    }
+
+        .onlinemarathon .modal-body .item ul li::before {
+            content: "• ";
+            color: #8A2BE2;
+            margin-left: -12px;
+        }
+
+    .onlinemarathon .modal-body .item .popupButton {
+        text-align: center;
+        padding: 15px;
+    }
+
+        .onlinemarathon .modal-body .item .popupButton .bottom {
+            border: solid 3px #FFF;
+            color: #FFF;
+            font-family: ubuntu, sans-serif;
+            font-weight: bold;
+            font-size: 25px;
+            width: 80%;
+            padding: 15px 60px;
+            margin: auto;
+            text-align: center;
+            cursor: pointer;
+            background-color: #8A2BE2;
+            border-radius: 5px;
+        }
+
+            .onlinemarathon .modal-body .item .popupButton .bottom:hover {
+                background-color: #40106D;
+                color: #FFF;
+                transition-duration: 1s;
+                transition-delay: 0s;
+                transition-timing-function: ease;
+                text-decoration: none;
+            }
+/*End*/
+.bgHead3 > .bottom {
+    border: solid 3px #FFF;
+    color: #FFF;
+    padding: 20px;
+    font-family: ubuntu, sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    position: absolute;
+    bottom: -50px;
+    width: 40%;
+    left: 31%;
+    text-align: center;
+    cursor: pointer;
+}
+
+    .bgHead3 > .bottom:hover {
+        background-color: #720000;
+        color: #FFF;
+        transition-duration: 1s;
+        transition-delay: 0s;
+        transition-timing-function: ease;
+    }
+
+.course .buyNowButton {
+    color: #FFF;
+    font-size: 25px;
+    background: #720000;
+    padding: 15px 50px;
+}
+
+    .course .buyNowButton:hover {
+        border-bottom: solid 3px #FF0000;
+        text-decoration: none;
+        color: #F1DE91;
+        transition-duration: 1s;
+        transition-delay: 0s;
+        transition-timing-function: ease;
+    }
+
+.course .priceDiv {
+    padding: 20px;
+    font-weight: bold;
+}
+
+.paging {
+    display: inline-block;
+    padding: 0px 9px;
+    margin-right: 4px;
+    border-radius: 3px;
+    border: solid 1px #c0c0c0;
+    background: #e9e9e9;
+    box-shadow: inset 0px 1px 0px rgba(255,255,255, .8), 0px 1px 3px rgba(0,0,0, .1);
+    font-size: .875em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #717171;
+    text-shadow: 0px 1px 0px rgba(255,255,255, 1);
+}
+
+    .paging:hover, .paging.gradient:hover {
+        background: #fefefe;
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE), to(#f0f0f0));
+        background: -moz-linear-gradient(0% 0% 270deg,#FEFEFE, #f0f0f0);
+    }
+
+    .paging.active {
+        border: none;
+        background: #616161;
+        box-shadow: inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .8);
+        color: #f0f0f0;
+        text-shadow: 0px 0px 3px rgba(0,0,0, .5);
+    }
