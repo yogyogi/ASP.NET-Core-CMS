@@ -1,0 +1,12 @@
+E:\Website\Project\CMS\CMS\bin\Debug\netcoreapp2.0\appsettings.json
+E:\Website\Project\CMS\CMS\bin\Debug\netcoreapp2.0\CMS.deps.json
+E:\Website\Project\CMS\CMS\bin\Debug\netcoreapp2.0\CMS.runtimeconfig.json
+E:\Website\Project\CMS\CMS\bin\Debug\netcoreapp2.0\CMS.runtimeconfig.dev.json
+E:\Website\Project\CMS\CMS\bin\Debug\netcoreapp2.0\CMS.dll
+E:\Website\Project\CMS\CMS\bin\Debug\netcoreapp2.0\CMS.pdb
+E:\Website\Project\CMS\CMS\obj\Debug\netcoreapp2.0\CMS.csproj.CoreCompileInputs.cache
+E:\Website\Project\CMS\CMS\obj\Debug\netcoreapp2.0\CMS.AssemblyInfoInputs.cache
+E:\Website\Project\CMS\CMS\obj\Debug\netcoreapp2.0\CMS.AssemblyInfo.cs
+E:\Website\Project\CMS\CMS\obj\Debug\netcoreapp2.0\CMS.dll
+E:\Website\Project\CMS\CMS\obj\Debug\netcoreapp2.0\CMS.pdb
+E:\Website\Project\CMS\CMS\obj\Debug\netcoreapp2.0\CMS.csprojResolveAssemblyReference.cache
