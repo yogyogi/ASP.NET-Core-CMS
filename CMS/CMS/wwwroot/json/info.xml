@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <siteTitle>Shree Ram</siteTitle>
+  <siteDescription>Welcome to Shree Ram CMS in ASP.NET Core</siteDescription>
+  <logo>/Upload/2019/1/logo.jpg</logo>
+</Info>
