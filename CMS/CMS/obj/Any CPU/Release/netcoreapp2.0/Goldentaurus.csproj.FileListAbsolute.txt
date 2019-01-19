@@ -1,0 +1,11 @@
+E:\Website\Goldentaurus\Goldentaurus\bin\Any CPU\Release\netcoreapp2.0\appsettings.json
+E:\Website\Goldentaurus\Goldentaurus\bin\Any CPU\Release\netcoreapp2.0\Goldentaurus.deps.json
+E:\Website\Goldentaurus\Goldentaurus\bin\Any CPU\Release\netcoreapp2.0\Goldentaurus.runtimeconfig.json
+E:\Website\Goldentaurus\Goldentaurus\bin\Any CPU\Release\netcoreapp2.0\Goldentaurus.runtimeconfig.dev.json
+E:\Website\Goldentaurus\Goldentaurus\bin\Any CPU\Release\netcoreapp2.0\Goldentaurus.dll
+E:\Website\Goldentaurus\Goldentaurus\bin\Any CPU\Release\netcoreapp2.0\Goldentaurus.pdb
+E:\Website\Goldentaurus\Goldentaurus\obj\Any CPU\Release\netcoreapp2.0\Goldentaurus.csproj.CoreCompileInputs.cache
+E:\Website\Goldentaurus\Goldentaurus\obj\Any CPU\Release\netcoreapp2.0\Goldentaurus.AssemblyInfoInputs.cache
+E:\Website\Goldentaurus\Goldentaurus\obj\Any CPU\Release\netcoreapp2.0\Goldentaurus.AssemblyInfo.cs
+E:\Website\Goldentaurus\Goldentaurus\obj\Any CPU\Release\netcoreapp2.0\Goldentaurus.dll
+E:\Website\Goldentaurus\Goldentaurus\obj\Any CPU\Release\netcoreapp2.0\Goldentaurus.pdb

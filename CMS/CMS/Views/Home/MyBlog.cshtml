@@ -1,0 +1,40 @@
+﻿@model BlogList
+@{
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+<div id="fh5co-blog" class="fh5co-bg-section" style="clear:both">
+    <div class="container">
+        <h1>@(((string[])ViewData["Meta"])[0])</h1>
+        <div class="row">
+            @foreach (var p in Model.blog)
+            {
+                <div class="col-md-4" style="height:600px;overflow:hidden;margin-top:50px;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="fh5co-blog animate-box">
+                                <a asp-controller="Home" asp-action="ViewBlog" asp-route-url="@p.Url" asp-route-id="@p.Id"><img class="img-responsive" src="@p.PrimaryImageUrl" alt="@p.Name" /></a>
+                                <div class="blog-text">
+                                    <span class="posted_on">@String.Format("{0:ddd, MMM d, yyyy}", p.AddedOn)</span>
+                                    <h3><a asp-controller="Home" asp-action="ViewBlog" asp-route-url="@p.Url" asp-route-id="@p.Id">@p.Name</a></h3>
+                                    @{
+                                        string description = System.Text.RegularExpressions.Regex.Replace(p.Description, @"<(.|\n)*?>", string.Empty);
+                                        <p>@Html.Raw(description.Substring(0, (description.Length > 100 ? 100 : description.Length)))</p>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="pagingDiv">
+            @{ 
+                var actionName = ViewBag.url == null ? "MyBlog" : "MyBlogCategory";
+            }
+            <div page-model="@Model.pagingInfo" status="@Model.status" search-text="@Model.searchText" page-action="@actionName" page-classes-enabled="true" page-class="paging" page-class-selected="active" page-other-url="@ViewBag.url"></div>
+        </div>
+    </div>
+</div>
+

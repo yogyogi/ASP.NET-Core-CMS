@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title - Goldentaurus</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/site/css/site.css" />
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="row">
+            <img class="col-sm-3" src="~/site/image/golden-taurus-logo.png" />
+            <span class="col-sm-9">+32 484 73 66 15</span>
+        </header>
+        @RenderSection("CourseBgImage", false)
+        <section id="content">@RenderBody()</section>
+        <footer><p>&copy; @DateTime.Now.Year - Goldentaurus</p></footer>
+    </div>
+    <script src="~/js/bundlejs.min.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    @RenderSection("Script", false)
+</body>
+</html>

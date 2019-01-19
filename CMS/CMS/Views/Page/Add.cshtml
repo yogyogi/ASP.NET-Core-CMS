@@ -1,0 +1,57 @@
+﻿@model Page
+<script src="~/js/CKEditor/ckeditor.js" type="text/javascript" language="javascript"></script>
+
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+<article>
+    <h1>@ViewBag.Title</h1>
+    <h2>@TempData["result"]</h2>
+    <form method="post">
+        <div class="control">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="text-box" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div class="lineControl">
+            <label asp-for="Url"></label>:-<label>@Context.Request.Scheme://@Context.Request.Host/@*@Context.Request.Path*@</label>
+            <input asp-for="Url" class="text-box" />
+            <span asp-validation-for="Url"></span>
+        </div>
+        <div class="control">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description"></textarea>
+            <script type="text/javascript" language="javascript">
+                CKEDITOR.replace(@Html.IdFor(model => model.Description));
+                CKEDITOR.config.allowedContent = true
+                CKEDITOR.ignoreEmptyParagraph = true;
+            </script>
+            <span asp-validation-for="Description"></span>
+        </div>
+        <div class="control">
+            <label asp-for="MetaTitle"></label>
+            <input asp-for="MetaTitle" class="text-box" />
+            <span asp-validation-for="MetaTitle"></span>
+        </div>
+        <div class="control">
+            <label asp-for="MetaKeyword"></label>
+            <input asp-for="MetaKeyword" class="text-box" />
+            <span asp-validation-for="MetaKeyword"></span>
+        </div>
+        <div class="control">
+            <label asp-for="MetaDescription"></label>
+            <input asp-for="MetaDescription" class="text-box" />
+            <span asp-validation-for="MetaDescription"></span>
+        </div>
+        <div class="control">
+            <label asp-for="Status"></label>
+            <select class="form-control" asp-for="Status">
+                <option value="true">Active</option>
+                <option value="false">InActive</option>
+            </select>
+        </div>
+        <div class="control">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</article>

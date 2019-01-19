@@ -1,0 +1,58 @@
+﻿@model BlogCategory
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+
+<article>
+    <h1>@ViewBag.Title</h1>
+    <h2>@TempData["result"]</h2>
+
+    <form method="post">
+        <div class="control">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="text-box" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="lineControl">
+            <label asp-for="Url"></label>:-<label>@Context.Request.Scheme://@Context.Request.Host/MyBlogCategory/</label>
+            <input asp-for="Url" class="text-box" />
+            <span asp-validation-for="Url" class="text-danger"></span>
+        </div>
+        <div class="control">
+            <label asp-for="ParentId"></label>
+            <select class="form-control" asp-for="ParentId" asp-items="ViewBag.CategoryList">
+                <option selected value="0">Select</option>
+            </select>
+        </div>
+        <div class="control">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="text-box" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="control">
+            <label asp-for="MetaTitle"></label>
+            <input asp-for="MetaTitle" class="text-box" />
+            <span asp-validation-for="MetaTitle" class="text-danger"></span>
+        </div>
+        <div class="control">
+            <label asp-for="MetaKeyword"></label>
+            <input asp-for="MetaKeyword" class="text-box" />
+            <span asp-validation-for="MetaKeyword" class="text-danger"></span>
+        </div>
+        <div class="control">
+            <label asp-for="MetaDescription"></label>
+            <input asp-for="MetaDescription" class="text-box" />
+            <span asp-validation-for="MetaDescription" class="text-danger"></span>
+        </div>
+        <div class="control">
+            <label asp-for="Status"></label>
+            <select class="form-control" asp-for="Status">
+                <option value="true">Active</option>
+                <option value="false">InActive</option>
+            </select>
+        </div>
+        <div class="control">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</article>

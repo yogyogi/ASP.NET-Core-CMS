@@ -1,0 +1,100 @@
+﻿@model LoggedUser
+
+<header id="adminBar" class="col-sm-12">
+    Welcome, @Model.UserName
+</header>
+<nav id="leftMenu" class="col-sm-3">
+    @if (Model.Role == "Admin")
+    {
+        <ul id="nav">
+            <li class="pageIcon">
+                <a>Pages</a>
+                <ul>
+                    <li>
+                        <a asp-controller="Page" asp-action="Index">All Page</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Page" asp-action="Add" asp-route-id="">Add Page</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="mediaIcon">
+                <a>Media</a>
+                <ul>
+                    <li>
+                        <a asp-controller="Media" asp-action="Index">All Media</a>
+                    </li>
+                    <li><a asp-controller="Media" asp-action="Add" asp-route-id="">Add Media</a></li>
+                </ul>
+            </li>
+            <li class="blogIcon">
+                <a>Blogs</a>
+                <ul>
+                    <li>
+                        <a asp-controller="BlogCategory" asp-action="Index">All Blog Category</a>
+                    </li>
+                    <li>
+                        <a asp-controller="BlogCategory" asp-action="Add" asp-route-id="">Add Blog Category</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Blog" asp-action="Index">All Blog</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Blog" asp-action="Add" asp-route-id="">Add Blog</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="siteIcon">
+                <a>Site Info</a>
+                <ul>
+                    <li>
+                        <a asp-controller="Info" asp-action="Index">Info</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="pageIcon">
+                <a>Menu</a>
+                <ul>
+                    <li>
+                        <a asp-controller="Menu" asp-action="Index">All Menu</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Menu" asp-action="Add" asp-route-id="">Add Menu</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="accountIcon">
+                <a>Account</a>
+                <ul>
+                    <li><a asp-controller="Admin" asp-action="Role">Role</a></li>
+                    <li><a asp-controller="Admin" asp-action="Logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    }
+    else
+    {
+        <ul id="nav">
+            <li class="pageIcon">
+                <a>User</a>
+                <ul>
+                    <li>
+                        <a asp-controller="User" asp-action="Edit">Edit</a>
+                    </li>
+                    <li>
+                        <a asp-controller="User" asp-action="Logout">Logout</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="siteIcon">
+                <a>Order</a>
+                <ul>
+                    <li>
+                        <a asp-controller="User" asp-action="Order">Orders</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    }
+
+</nav>

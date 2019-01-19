@@ -1,0 +1,31 @@
+﻿@model List<FileUpload>
+@{
+    ViewBag.Title = "Add Media";
+}
+
+<article>
+    <h1>Add Media</h1>
+    @if (!string.IsNullOrEmpty(ViewBag.result))
+    {
+        <h2>@ViewBag.Result</h2>
+    }
+
+    <form method="post" asp-action="Add" enctype="multipart/form-data">
+        <input type="file" multiple name="mediaUpload" />
+        <button type="submit">Submit</button>
+    </form>
+
+    @if (Model != null)
+    {
+        <div id="mediaItem">
+            @foreach (var p in Model)
+            {
+                <div class="item">
+                    <img width="32" height="32" src="@Url.Content(p.url)" />
+                    <a asp-action="Update" asp-route-id="@p.id">Edit</a>
+                    <div><span>@p.name</span></div>
+                </div>
+            }
+        </div>
+    }
+</article>
