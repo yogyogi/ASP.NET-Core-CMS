@@ -18,7 +18,11 @@ I have build this CMS using the following:
 
 ## Installation
 
-Download the CMS files in your system and click the .sln file to open it with Visual Studio 2017 or newer version. You need to follow the following Steps:
+Download the CMS files in your system and click the .sln file to open it with Visual Studio 2017 or newer version. 
+
+I have also created a [Youtube video for the installation of this CMS](https://www.yogihosting.com/migrations-entity-framework-core/), you will find it very useful.
+
+You need to follow the following Steps:
 
 ## Step 1: Change connection string
 
@@ -35,7 +39,7 @@ Then open the `appsettings.json` file given in the root of the CMS and change th
 
 To run this CMS you will need 2 databases. One that will store pages, blogs, images, etc. The other one will be used by Identity Management to do authentication and authorization of Admin User.
 
-You don't have to learn Identity for using this CMS but if you still like then visit [How to Setup and Configure Identity Membership System in ASP.NET Core](https://www.yogihosting.com/aspnet-core-identity-setup/)
+You don't have to learn Identity for using this CMS but if you still like then visit [How to Setup and Configure Identity Membership System in ASP.NET Core](https://www.youtube.com/watch?v=_NESt5nQGI4)
 
 ## Step 2: Run EF Core Migration commands
 
