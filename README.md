@@ -1,4 +1,4 @@
-# Shree RAM CMS - the world's first ASP.NET-Core-CMS
+# Shree RAM CMS - the world's first ASP.NET Core CMS
 ![Shree RAM CMS](https://raw.githubusercontent.com/yogyogi/ASP.NET-Core-CMS/master/sree-ram-cms.png)
 
 This is an Open-Source Content Management System(CMS) developed with [ASP.NET Core](https://www.yogihosting.com/category/aspnet-core/) framework by Microsoft. Use it to create any type of Responsive websites with unlimited pages and unlimited blogs.
@@ -9,16 +9,16 @@ This is an Open-Source Content Management System(CMS) developed with [ASP.NET Co
 
 I have build this CMS using the following:
 
-1. ASP.NET Core 2.0
+1. ASP.NET Core 5.0
 2. C#
 3. Bootstrap 4
 4. SQL Server
-5. Identity Management
-6. Entity Framework Core
+5. ASP.NET Core Identity
+6. Entity Framework Core 5.0
 
 ## Installation
 
-Download the CMS files in your system and click the .sln file to open it with Visual Studio 2017 or newer version. 
+Download the CMS files in your system and click the .sln file to open it with Visual Studio 2019 or newer version. 
 
 I have also created a [Youtube video for the installation of this CMS](https://www.youtube.com/watch?v=_NESt5nQGI4), you will find it very useful.
 
@@ -69,11 +69,11 @@ The ADMIN user should be created in the Identity Database and this user will acc
 
 Run your application in Visual Studio (shortcut F5 key) and then open the below URL in your browser to create the Admin user:
 
-`http://localhost:60905/Login/Create`
+`https://localhost:44375/Login/Create`
 
 Change port 60905  to the one your VS has set for this CMS. If you are running this CMS online in a domain then URL will be:
 
-`http://yourdomain.com/Login/Create`
+`https://yourdomain.com/Login/Create`
 
 By default the Admin user will be created with the following Credentials:
 
@@ -84,7 +84,7 @@ By default the Admin user will be created with the following Credentials:
 
 The login URL of the CMS is:
 
-`http://localhost:60905/Login`
+`https://localhost:44375/Login`
 
 Login with the following Credentials:
 
@@ -111,7 +111,7 @@ Finally Click the submit button at the bottom.
 
 You can now View the website by running this URL in your browser:
 
-`http://localhost:60905`
+`https://localhost:44375`
 
 ## Demo Data by running SQL Script
 
