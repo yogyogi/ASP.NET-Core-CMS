@@ -119,7 +119,8 @@ You can now View the website by running this URL in your browser:
 You can ignore step 6 completely and just run the `data.sql` file (provided in this repository) in your SQL Server Management Studio on the CMS database (not on Identiy Database). This script file will add all your DEMO data.
 
 ## Support
-Support This Project to keep it active.
+
+If you find it useful then support this Project. Thank you.
 
 <a href="https://www.buymeacoffee.com/YogYogi" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" width="200"></a>
 
