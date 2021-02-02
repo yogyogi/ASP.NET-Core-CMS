@@ -21,6 +21,7 @@ I have build this CMS using the following:
 Download the CMS files in your system and click the .sln file to open it with Visual Studio 2019 or newer version. 
 
 I have also created a [Youtube video for the installation of this CMS](https://www.youtube.com/watch?v=_NESt5nQGI4), you will find it very useful.
+[![installation video](https://raw.githubusercontent.com/yogyogi/ASP.NET-Core-CMS/master/Untitled-1.png)](https://www.youtube.com/watch?v=_NESt5nQGI4 "Video Title")
 
 You need to follow the following Steps:
 
