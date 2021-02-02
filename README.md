@@ -118,7 +118,10 @@ You can now View the website by running this URL in your browser:
 
 You can ignore step 6 completely and just run the `data.sql` file (provided in this repository) in your SQL Server Management Studio on the CMS database (not on Identiy Database). This script file will add all your DEMO data.
 
-## In the End
+## Support
+Support This Project to keep it active.
+
+<a href="https://www.buymeacoffee.com/YogYogi" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" width="200"></a>
 
 You will love the 'Sree RAM' CMS made in ASP.NET Core framework. Star this Repository to show your support. 
 
