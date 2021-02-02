@@ -14,7 +14,7 @@
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="lineControl">
-            <label asp-for="Url"></label>:-<label>@Context.Request.Scheme://@Context.Request.Host/MyBlogCategory/</label>
+            <label asp-for="Url"></label>:-<label>@Context.Request.Scheme://@Context.Request.Host/MyBlogCategory?url=</label>
             <input asp-for="Url" class="text-box" />
             <span asp-validation-for="Url" class="text-danger"></span>
         </div>

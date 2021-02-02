@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CMS.Models;
 using CMS.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using CMS.Infrastructure;
 
 namespace CMS.Controllers
@@ -90,7 +90,7 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Output,
                                         Size = 100
                                     }};
-                    context.Database.ExecuteSqlCommand("[dbo].[sp_GetURL] @Url, @Sep, @TableName, @Id, @TempUrl out", param);
+                    context.Database.ExecuteSqlRaw("[dbo].[sp_GetURL] @Url, @Sep, @TableName, @Id, @TempUrl out", param);
 
                     blog.Url = Convert.ToString(param[4].Value);
                     context.Blog.Add(blog);
@@ -137,7 +137,7 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Output,
                                         Size = 100
                                     }};
-                    context.Database.ExecuteSqlCommand("[dbo].[sp_GetURL] @Url, @Sep, @TableName, @Id, @TempUrl out", param);
+                    context.Database.ExecuteSqlRaw("[dbo].[sp_GetURL] @Url, @Sep, @TableName, @Id, @TempUrl out", param);
 
                     var blogResult = context.Blog.Where(x => x.Id == id).FirstOrDefault();
                     blogResult.Name = blog.Name;
@@ -241,7 +241,7 @@ namespace CMS.Controllers
                                         Size = 10,
                                         Value =  date == "null" ? "all" : date
                                     }};
-            var mediaList = context.Media.FromSql("[dbo].[sp_GetMediaWithPaging] @PageNo, @PageSize, @Name, @FileType, @MediaDateSearch", param);
+            var mediaList = context.Media.FromSqlRaw("[dbo].[sp_GetMediaWithPaging] @PageNo, @PageSize, @Name, @FileType, @MediaDateSearch", param);
             foreach (Media media in mediaList)
             {
                 string url = media.ThumbUrl == null ? media.Url : media.ThumbUrl;

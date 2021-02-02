@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using CMS.Infrastructure;
 using CMS.Models;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CMS.Models.ViewModels;
@@ -84,7 +84,7 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Output,
                                         Size = 100
                                     }};
-                    context.Database.ExecuteSqlCommand("[dbo].[sp_GetURL] @Url, @Sep, @TableName, @Id, @TempUrl out", param);
+                    context.Database.ExecuteSqlRaw("[dbo].[sp_GetURL] @Url, @Sep, @TableName, @Id, @TempUrl out", param);
 
                     blogCategory.ParentId = blogCategory.ParentId == 0 ? null : (int?)blogCategory.ParentId;
                     blogCategory.Url = Convert.ToString(param[4].Value);
@@ -133,7 +133,7 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Output,
                                         Size = 100
                                     }};
-                    context.Database.ExecuteSqlCommand("[dbo].[sp_GetURL] @Url, @Sep, @TableName, @Id, @TempUrl out", param);
+                    context.Database.ExecuteSqlRaw("[dbo].[sp_GetURL] @Url, @Sep, @TableName, @Id, @TempUrl out", param);
 
                     var category = context.BlogCategory.Where(x => x.Id == id).FirstOrDefault();
                     category.ParentId = blogCategory.ParentId == 0 ? null : (int?)blogCategory.ParentId;
@@ -196,7 +196,7 @@ namespace CMS.Controllers
                                         Size = 50
                                     }
                     };
-                    context.Database.ExecuteSqlCommand("[dbo].[sp_UpdateBulkBlogCategoryStatus] @Id, @Status, @Result out", param);
+                    context.Database.ExecuteSqlRaw("[dbo].[sp_UpdateBulkBlogCategoryStatus] @Id, @Status, @Result out", param);
                     result = Convert.ToString(param[2].Value);
                 }
             }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using CMS.Models;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using CMS.Models.ViewModels;
 using CMS.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +36,7 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Input,
                                         Value = id
                                     }};
-                    page = context.Page.FromSql("[dbo].[sp_GetPageById] @Id", param).FirstOrDefault();
+                    page = context.Page.FromSqlRaw("[dbo].[sp_GetPageById] @Id", param).AsEnumerable().FirstOrDefault();
                     ViewBag.Title = "Update Page";
                     return View(page);
                 }
@@ -116,7 +116,7 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Output,
                                     }};
 
-                        context.Database.ExecuteSqlCommand("[dbo].[sp_InsertPage] @Name, @Url, @MetaTitle, @MetaKeyword, @MetaDescription, @Description, @Status, @Result out, @CreatedId out", param);
+                        context.Database.ExecuteSqlRaw("[dbo].[sp_InsertPage] @Name, @Url, @MetaTitle, @MetaKeyword, @MetaDescription, @Description, @Status, @Result out, @CreatedId out", param);
 
                         TempData["result"] = Convert.ToString(param[7].Value);
                         if (Convert.ToString(param[7].Value) == "Insert Successful")
@@ -191,7 +191,7 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Output,
                                         Size=100
                                     }};
-                        context.Database.ExecuteSqlCommand("[dbo].[sp_UpdatePage] @Id, @Name, @Url, @MetaTitle, @MetaKeyword, @MetaDescription, @Description, @Status, @Result out, @CreatedUrl out", param);
+                        context.Database.ExecuteSqlRaw("[dbo].[sp_UpdatePage] @Id, @Name, @Url, @MetaTitle, @MetaKeyword, @MetaDescription, @Description, @Status, @Result out, @CreatedUrl out", param);
                         ModelState.Clear();
                         page.Url = Convert.ToString(param[9].Value);
                         TempData["result"] = Convert.ToString(param[8].Value);
@@ -235,7 +235,7 @@ namespace CMS.Controllers
                                         Size = 50
                                     }
                     };
-                    context.Database.ExecuteSqlCommand("[dbo].[sp_UpdateBulkPageStatus] @Id, @Status, @Result out", param);
+                    context.Database.ExecuteSqlRaw("[dbo].[sp_UpdateBulkPageStatus] @Id, @Status, @Result out", param);
                     result = Convert.ToString(param[2].Value);
                 }
             }

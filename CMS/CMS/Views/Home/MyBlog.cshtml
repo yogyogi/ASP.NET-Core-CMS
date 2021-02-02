@@ -13,10 +13,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="fh5co-blog animate-box">
-                                <a asp-controller="Home" asp-action="ViewBlog" asp-route-url="@p.Url" asp-route-id="@p.Id"><img class="img-responsive" src="@p.PrimaryImageUrl" alt="@p.Name" /></a>
+                                <a asp-controller="Home" asp-action="ViewBlog" asp-route-name="@p.Url">
+                                    <img class="img-responsive" src="@p.PrimaryImageUrl" alt="@p.Name" />
+                                </a>
                                 <div class="blog-text">
                                     <span class="posted_on">@String.Format("{0:ddd, MMM d, yyyy}", p.AddedOn)</span>
-                                    <h3><a asp-controller="Home" asp-action="ViewBlog" asp-route-url="@p.Url" asp-route-id="@p.Id">@p.Name</a></h3>
+                                    <h3><a asp-controller="Home" asp-action="ViewBlog" asp-route-name="@p.Url">@p.Name</a></h3>
                                     @{
                                         string description = System.Text.RegularExpressions.Regex.Replace(p.Description, @"<(.|\n)*?>", string.Empty);
                                         <p>@Html.Raw(description.Substring(0, (description.Length > 100 ? 100 : description.Length)))</p>

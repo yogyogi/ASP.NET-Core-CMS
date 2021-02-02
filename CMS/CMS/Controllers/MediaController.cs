@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Web;
 using Microsoft.AspNetCore.Http;
 using CMS.Infrastructure;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
@@ -23,9 +23,9 @@ namespace CMS.Controllers
     [Authorize(Roles = "Admin")]
     public class MediaController : Controller
     {
-        private IHostingEnvironment hostingEnvironment;
+        private IWebHostEnvironment hostingEnvironment;
 
-        public MediaController(IHostingEnvironment environment)
+        public MediaController(IWebHostEnvironment environment)
         {
             hostingEnvironment = environment;
         }
@@ -158,21 +158,21 @@ namespace CMS.Controllers
                                         SqlDbType =  System.Data.SqlDbType.VarChar,
                                         Direction = System.Data.ParameterDirection.Input,
                                         Size = 100,
-                                        Value = media.Title
+                                        Value = media.Title??(object)DBNull.Value
                                     },
                                     new SqlParameter() {
                                         ParameterName = "@Alt",
                                         SqlDbType =  System.Data.SqlDbType.VarChar,
                                         Direction = System.Data.ParameterDirection.Input,
                                         Size = 100,
-                                        Value = media.Alt
+                                        Value = media.Alt??(object)DBNull.Value
                                     },
                                     new SqlParameter() {
                                         ParameterName = "@Description",
                                         SqlDbType =  System.Data.SqlDbType.VarChar,
                                         Direction = System.Data.ParameterDirection.Input,
                                         Size = 100,
-                                        Value = media.Description
+                                        Value = media.Description??(object)DBNull.Value
                                     },
                                     new SqlParameter()
                                     {
@@ -183,7 +183,7 @@ namespace CMS.Controllers
                                     }};
                 using (var context = new CMSContext())
                 {
-                    context.Database.ExecuteSqlCommand("[dbo].[sp_UpdateMedia] @Id, @Name, @Url, @Title, @Alt, @Description, @Result out", param);
+                    context.Database.ExecuteSqlRaw("[dbo].[sp_UpdateMedia] @Id, @Name, @Url, @Title, @Alt, @Description, @Result out", param);
                 }
                 ViewBag.Title = "Update Media";
                 ViewBag.result = Convert.ToString(param[6].Value);
@@ -203,7 +203,7 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Input,
                                         Value = ids
                                     }};
-                context.Database.ExecuteSqlCommand("[dbo].[sp_DeleteMedia] @Id", param);
+                context.Database.ExecuteSqlRaw("[dbo].[sp_DeleteMedia] @Id", param);
             }
             foreach (string path in paths.Split(','))
                 System.IO.File.Delete(Path.Combine(hostingEnvironment.WebRootPath, path.Substring(1)));
@@ -278,7 +278,7 @@ namespace CMS.Controllers
                                         Size = 10,
                                         Value = date=="null" ? "all" : date
                                     }};
-                var result = context.Media.FromSql("[dbo].[sp_GetMediaWithPaging] @PageNo, @PageSize, @Name, @FileType, @MediaDateSearch", param);
+                var result = context.Media.FromSqlRaw("[dbo].[sp_GetMediaWithPaging] @PageNo, @PageSize, @Name, @FileType, @MediaDateSearch", param);
 
                 foreach (Media item in result)
                 {
@@ -372,7 +372,7 @@ namespace CMS.Controllers
                                         SqlDbType = System.Data.SqlDbType.Int,
                                         Direction = System.Data.ParameterDirection.Output
                                     }};
-                context.Database.ExecuteSqlCommand("[dbo].[sp_InsertMedia] @Name, @Url, @Title, @Alt, @Description, @ParentId, @Result out, @CreatedFileName out, @CreatedId out", param);
+                context.Database.ExecuteSqlRaw("[dbo].[sp_InsertMedia] @Name, @Url, @Title, @Alt, @Description, @ParentId, @Result out, @CreatedFileName out, @CreatedId out", param);
                 return new string[] { Convert.ToString(param[6].Value), Convert.ToString(param[7].Value), Convert.ToString(param[8].Value) };
             }
         }
@@ -483,11 +483,11 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Input,
                                         Value = id
                                     }};
-                var resultList = context.Media.FromSql("[dbo].[sp_GetMediaById] @id", param);
+                var resultList = context.Media.FromSqlRaw("[dbo].[sp_GetMediaById] @id", param).AsEnumerable();
 
                 if (resultList != null)
                 {
-                    media = resultList.FirstOrDefault();
+                    media = resultList.AsEnumerable().FirstOrDefault();
                     media.DisplayUrl = "images/file-icon.png";
 
                     long fileSize = new FileInfo(Path.Combine(hostingEnvironment.WebRootPath, Convert.ToString(resultList.Select(x => x.Url).FirstOrDefault()))).Length;

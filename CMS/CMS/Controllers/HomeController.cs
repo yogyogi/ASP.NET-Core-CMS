@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using CMS.Infrastructure;
 using Microsoft.AspNetCore.Identity;
-//https://www.free-css.com/assets/files/free-css-templates/preview/page235/words/
+
 namespace CMS.Controllers
 {
     public class HomeController : Controller
@@ -32,22 +32,22 @@ namespace CMS.Controllers
             return View(page);
         }
 
-        public IActionResult Page(string url)
+        public IActionResult Page(string name)
         {
             Page page = new Page();
             using (var context = new CMSContext())
             {
-                page = context.Page.Where(t => t.Url == url).FirstOrDefault();
+                page = context.Page.Where(t => t.Url == name).FirstOrDefault();
             }
             return View("Index", page);
         }
 
-        public IActionResult ViewBlog(int id)
+        public IActionResult ViewBlog(string name)
         {
             Blog blog = new Blog();
             using (var context = new CMSContext())
             {
-                blog = context.Blog.Where(t => t.Id == id).FirstOrDefault();
+                blog = context.Blog.Where(t => t.Url == name).FirstOrDefault();
                 blog.PrimaryImageUrl = blog.PrimaryImageId != null ? "/" + context.Media.Where(x => x.Id == blog.PrimaryImageId).Select(x => x.Url).FirstOrDefault() : "/images/addphoto.jpg";
 
                 ViewBag.BlogCategory = context.BlogCategory.Where(t => t.Status == true).ToList();
@@ -55,7 +55,7 @@ namespace CMS.Controllers
             return View(blog);
         }
 
-        public IActionResult MyBlogCategory(string name, int id, string url)
+        public IActionResult MyBlogCategory(int id, string url)
         {
             BlogList list = new BlogList();
 

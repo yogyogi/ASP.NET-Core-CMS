@@ -9,8 +9,8 @@ namespace CMS.Infrastructure
 {
     public class CommonFunction
     {
-        private IHostingEnvironment hostingEnvironment;
-        public CommonFunction(IHostingEnvironment env)
+        private IWebHostEnvironment hostingEnvironment;
+        public CommonFunction(IWebHostEnvironment env)
         {
             hostingEnvironment = env;
         }

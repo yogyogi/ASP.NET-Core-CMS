@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CMS.Models;
+using Microsoft.Extensions.Hosting;
 
 namespace CMS
 {
@@ -32,126 +33,56 @@ namespace CMS
             /*Identity Login Url */
             services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Login");
 
-            services.AddMvc();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseDeveloperExceptionPage();
-                //app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseRouting();
 
             /*Identity*/
             app.UseAuthentication();
+            app.UseAuthorization();
             /*End*/
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                /*Menu*/
-                routes.MapRoute(
-                name: "PagingPageOne-menu",
-                template: "Menu",
-                defaults: new { controller = "Menu", action = "Index", id = 1 }
-                );
+                endpoints.MapControllerRoute(
+                    name: "View-Blog",
+                    pattern: "b/{name}",
+                    defaults: new { controller = "Home", action = "ViewBlog" });
 
-                routes.MapRoute(
-                name: "Paging-menu",
-                template: "Menu/{id:int?}",
-                defaults: new { controller = "Menu", action = "Index" });
-                /*End*/
+                endpoints.MapControllerRoute(
+                    name: "PagingPageOne",
+                    pattern: "{controller}",
+                    defaults: new { controller = "Home", action = "Index", id = 1 });
 
-                /*Page*/
-                routes.MapRoute(
-                name: "PagingPageOne-page",
-                template: "Page",
-                defaults: new { controller = "Page", action = "Index", id = 1 }
-                );
+                endpoints.MapControllerRoute(
+                    name: "Paging",
+                    pattern: "{controller}/{id:int?}",
+                    defaults: new { controller = "Home", action = "Index" });
 
-                routes.MapRoute(
-                name: "Paging-page",
-                template: "Page/{id:int?}",
-                defaults: new { controller = "Page", action = "Index" });
-                /*End*/
+                endpoints.MapControllerRoute(
+                    name: "MatchUrl",
+                    pattern: "{name:required}",
+                    defaults: new { controller = "Home", action = "Page" });
 
-                /*MyBlogCategory*/
-                routes.MapRoute(
-                name: "PagingPageOne-myblogcategory",
-                template: "MyBlogCategory/{url}",
-                defaults: new { controller = "Home", action = "MyBlogCategory", id = 1 }
-                );
-
-                routes.MapRoute(
-                name: "Paging-myblogcategory",
-                template: "MyBlogCategory/{url}/{id:int?}",
-                defaults: new { controller = "Home", action = "MyBlogCategory" });
-                /*End*/
-
-                /*MyBlog*/
-                routes.MapRoute(
-                name: "PagingPageOne-myblog",
-                template: "MyBlog",
-                defaults: new { controller = "Home", action = "MyBlog", id = 1 }
-                );
-
-                routes.MapRoute(
-                name: "Paging-myblog",
-                template: "MyBlog/{id:int?}",
-                defaults: new { controller = "Home", action = "MyBlog" });
-                /*End*/
-
-                /*Blog*/
-                routes.MapRoute(
-                name: "PagingPageOne-blog",
-                template: "Blog",
-                defaults: new { controller = "Blog", action = "Index", id = 1 }
-                );
-
-                routes.MapRoute(
-                name: "Paging-blog",
-                template: "Blog/{id:int?}",
-                defaults: new { controller = "Blog", action = "Index" });
-                /*End*/
-
-                /*Blog Category*/
-                routes.MapRoute(
-                name: "PagingPageOne-blogcategory",
-                template: "BlogCategory",
-                defaults: new { controller = "BlogCategory", action = "Index", id = 1 }
-                );
-
-                routes.MapRoute(
-                name: "Paging-blogcategory",
-                template: "BlogCategory/{id:int?}",
-                defaults: new { controller = "BlogCategory", action = "Index" });
-                /*End*/
-
-                /*View Blog*/
-                routes.MapRoute(
-                name: "View-Blog",
-                template: "{url}-id-{id}",
-                defaults: new { controller = "Home", action = "ViewBlog" });
-                /*End*/
-
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
-                /*View Page*/
-                routes.MapRoute(
-                name: "View-Page",
-                template: "{url}",
-                defaults: new { controller = "Home", action = "Page" });
-                /*End*/
+                endpoints.MapControllerRoute(
+                   name: "default",
+                   pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

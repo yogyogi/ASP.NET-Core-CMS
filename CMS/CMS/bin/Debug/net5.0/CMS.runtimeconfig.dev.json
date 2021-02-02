@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Avita\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Avita\\.nuget\\packages"
+    ]
+  }
+}

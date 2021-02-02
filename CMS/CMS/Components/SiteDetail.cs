@@ -3,6 +3,7 @@ using CMS.Models;
 using CMS.Models.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,9 @@ namespace CMS.Components
 {
     public class SiteInfo : ViewComponent
     {
-        private IHostingEnvironment hostingEnvironment;
+        private IWebHostEnvironment hostingEnvironment;
 
-        public SiteInfo(IHostingEnvironment environment)
+        public SiteInfo(IWebHostEnvironment environment)
         {
             hostingEnvironment = environment;
         }
@@ -56,7 +57,7 @@ namespace CMS.Components
             Menu menu = new Menu();
             using (var context = new CMSContext())
             {
-                menu = context.Menu.Where(x => x.Name == "Main").FirstOrDefault();
+                menu =  await context.Menu.Where(x => x.Name == "Main" && x.Status == true).FirstOrDefaultAsync();
             }
             return View((object)BindMenu(menu));
         }
@@ -64,6 +65,8 @@ namespace CMS.Components
         string BindMenu(Menu menu)
         {
             //json has [] therore changed the below code accordingly
+            if (menu == null)
+                return "";
             var rootObject = JsonConvert.DeserializeObject<List<MenuJsonRoot>>(menu.Item);
             string mainString = "<ul>";
 
@@ -107,7 +110,7 @@ namespace CMS.Components
 
         string CreateMenuItem(MenuJsonChild child)
         {
-            string childString = "<li><a href=\"" + child.slug + "\">" + child.name + "</a></li>";
+            string childString = "<li><a href=\"/" + child.slug + "\">" + child.name + "</a></li>";
             return childString;
         }
     }

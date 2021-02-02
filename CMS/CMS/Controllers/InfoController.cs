@@ -11,16 +11,16 @@ using System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CMS.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace CMS.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class InfoController : Controller
     {
-        private IHostingEnvironment hostingEnvironment;
+        private IWebHostEnvironment hostingEnvironment;
 
-        public InfoController(IHostingEnvironment environment)
+        public InfoController(IWebHostEnvironment environment)
         {
             hostingEnvironment = environment;
         }
@@ -131,7 +131,7 @@ namespace CMS.Controllers
                                         Size = 10,
                                         Value =  date == "null" ? "all" : date
                                     }};
-            var mediaList = context.Media.FromSql("[dbo].[sp_GetMediaWithPaging] @PageNo, @PageSize, @Name, @FileType, @MediaDateSearch", param);
+            var mediaList = context.Media.FromSqlRaw("[dbo].[sp_GetMediaWithPaging] @PageNo, @PageSize, @Name, @FileType, @MediaDateSearch", param);
             foreach (Media media in mediaList)
             {
                 string url = media.ThumbUrl == null ? media.Url : media.ThumbUrl;
