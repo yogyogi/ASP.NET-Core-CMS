@@ -1,4 +1,5 @@
 # Shree RAM CMS - the world's first ASP.NET Core CMS
+## (Now Updated to .NET 10.0)
 ![Shree RAM CMS](https://raw.githubusercontent.com/yogyogi/ASP.NET-Core-CMS/master/sree-ram-cms.png)
 
 This is an Open-Source Content Management System(CMS) developed with [ASP.NET Core](https://www.yogihosting.com/category/aspnet-core/) framework by Microsoft. Use it to create any type of Responsive websites with unlimited pages and unlimited blogs.
@@ -9,16 +10,16 @@ This is an Open-Source Content Management System(CMS) developed with [ASP.NET Co
 
 I have build this CMS using the following:
 
-1. ASP.NET Core 5.0
+1. ASP.NET Core 10.0
 2. C#
-3. Bootstrap 4
+3. Bootstrap 5
 4. SQL Server
 5. ASP.NET Core Identity
-6. Entity Framework Core 5.0
+6. Entity Framework Core
 
 ## Installation
 
-Download the CMS files in your system and click the .sln file to open it with Visual Studio 2019 or newer version. 
+Download the CMS files in your system and click the .sln file to open it with Visual Studio 2026 or newer version. 
 
 1. I have also created a [Youtube video for the installation of this CMS](https://www.youtube.com/watch?v=_NESt5nQGI4), you will find it very useful.
 2. Also check the working tutorial of this CMS [Youtube video for the working of this CMS](https://www.youtube.com/watch?v=vFFSAmOk-WA).
@@ -31,10 +32,17 @@ Then open the `appsettings.json` file given in the root of the CMS and change th
 
 `
 {
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Server=vaio;Database=CMSCore;Trusted_Connection=True;",
-    "IdentityConnection": "Server=vaio;Database=CMSCoreIdentity;Trusted_Connection=True;"
- }
+    "DefaultConnection": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CMSCore;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
+    "IdentityConnection": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CMSCoreIdentity;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;"
+  }
 }
 `
 
@@ -46,7 +54,7 @@ You don't have to learn Identity for using this CMS but if you still like then v
 
 The [EF Core Migrations](https://www.yogihosting.com/migrations-entity-framework-core/) commands will create both the databases for this CMS.
 
-Open Package Manage Console and go to the directory of the Startup.cs class:
+Open Package Manage Console and go to the directory of the `Program.cs` class:
 
 `PM> cd CMS`
 
