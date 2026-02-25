@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CMS.Models;
 using CMS.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Web;
-using Microsoft.AspNetCore.Http;
 using CMS.Infrastructure;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
 using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -23,18 +15,20 @@ namespace CMS.Controllers
     [Authorize(Roles = "Admin")]
     public class MediaController : Controller
     {
+        private CMSContext context;
         private IWebHostEnvironment hostingEnvironment;
 
-        public MediaController(IWebHostEnvironment environment)
+        public MediaController(IWebHostEnvironment environment, CMSContext cc)
         {
             hostingEnvironment = environment;
+            context = cc;
         }
 
         public ActionResult Index()
         {
             Media media = new Media();
-            media.MediaDate = GetMediaDate();
             media.Result = GetMediaWithPaging("all", "all", 1, null);
+            media.MediaDate = GetMediaDate();
             return View(media);
         }
 
@@ -181,10 +175,7 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Output,
                                         Size = 50
                                     }};
-                using (var context = new CMSContext())
-                {
-                    context.Database.ExecuteSqlRaw("[dbo].[sp_UpdateMedia] @Id, @Name, @Url, @Title, @Alt, @Description, @Result out", param);
-                }
+                context.Database.ExecuteSqlRaw("[dbo].[sp_UpdateMedia] @Id, @Name, @Url, @Title, @Alt, @Description, @Result out", param);
                 ViewBag.Title = "Update Media";
                 ViewBag.result = Convert.ToString(param[6].Value);
             }
@@ -193,9 +184,7 @@ namespace CMS.Controllers
 
         public string DeleteMedia(string ids, string paths)
         {
-            using (var context = new CMSContext())
-            {
-                var param = new SqlParameter[] {
+            var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@Id",
                                         SqlDbType =  System.Data.SqlDbType.VarChar,
@@ -203,8 +192,7 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Input,
                                         Value = ids
                                     }};
-                context.Database.ExecuteSqlRaw("[dbo].[sp_DeleteMedia] @Id", param);
-            }
+            context.Database.ExecuteSqlRaw("[dbo].[sp_DeleteMedia] @Id", param);
             foreach (string path in paths.Split(','))
                 System.IO.File.Delete(Path.Combine(hostingEnvironment.WebRootPath, path.Substring(1)));
             return "Success";
@@ -214,7 +202,6 @@ namespace CMS.Controllers
         {
             List<SelectListItem> mediaDateList = new List<SelectListItem>();
             List<MediaDate> mdList = new List<MediaDate>();
-            var context = new CMSContext();
             using (var cnn = context.Database.GetDbConnection())
             {
                 var cmm = cnn.CreateCommand();
@@ -241,9 +228,7 @@ namespace CMS.Controllers
             //http://webdeveloperplus.com/jquery/create-a-dynamic-scrolling-content-box-using-ajax/ http://stackoverflow.com/questions/8480466/how-to-check-if-scrollbar-is-at-the-bottom
             //http://stackoverflow.com/questions/19933115/mvc-4-postback-on-dropdownlist-change
             StringBuilder stringBuilder = new StringBuilder();
-            using (var context = new CMSContext())
-            {
-                var param = new SqlParameter[] {
+            var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@PageNo",
                                         SqlDbType =  System.Data.SqlDbType.Int,
@@ -278,18 +263,17 @@ namespace CMS.Controllers
                                         Size = 10,
                                         Value = date=="null" ? "all" : date
                                     }};
-                var result = context.Media.FromSqlRaw("[dbo].[sp_GetMediaWithPaging] @PageNo, @PageSize, @Name, @FileType, @MediaDateSearch", param);
+            var result = context.Media.FromSqlRaw("[dbo].[sp_GetMediaWithPaging] @PageNo, @PageSize, @Name, @FileType, @MediaDateSearch", param).ToList();
 
-                foreach (Media item in result)
-                {
-                    bool isImage = IsImage(item.Name);
-                    string url = "";
-                    if (isImage)
-                        url = item.ThumbUrl == null ? item.Url : item.ThumbUrl;
-                    else
-                        url = "images/file-icon.png";
-                    stringBuilder.Append("<li class=\"item\"><a href=\"" + Url.Action("Update", new { id = item.Id }) + "\"><img data-url=\"/" + item.Url + "\" width =\"135\" src=\"" + Url.Content("~/" + url) + "\"/></a></li>");
-                }
+            foreach (Media item in result)
+            {
+                bool isImage = IsImage(item.Name);
+                string url = "";
+                if (isImage)
+                    url = item.ThumbUrl == null ? item.Url : item.ThumbUrl;
+                else
+                    url = "images/file-icon.png";
+                stringBuilder.Append("<li class=\"item\"><a href=\"" + Url.Action("Update", new { id = item.Id }) + "\"><img data-url=\"/" + item.Url + "\" width =\"135\" src=\"" + Url.Content("~/" + url) + "\"/></a></li>");
             }
 
             return stringBuilder.ToString();
@@ -308,9 +292,7 @@ namespace CMS.Controllers
 
         public string[] InsertMedia(IFormFile file, string fileName, int? parentId)
         {
-            using (var context = new CMSContext())
-            {
-                var param = new SqlParameter[] {
+            var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@Name",
                                         SqlDbType =  System.Data.SqlDbType.VarChar,
@@ -372,9 +354,8 @@ namespace CMS.Controllers
                                         SqlDbType = System.Data.SqlDbType.Int,
                                         Direction = System.Data.ParameterDirection.Output
                                     }};
-                context.Database.ExecuteSqlRaw("[dbo].[sp_InsertMedia] @Name, @Url, @Title, @Alt, @Description, @ParentId, @Result out, @CreatedFileName out, @CreatedId out", param);
-                return new string[] { Convert.ToString(param[6].Value), Convert.ToString(param[7].Value), Convert.ToString(param[8].Value) };
-            }
+            context.Database.ExecuteSqlRaw("[dbo].[sp_InsertMedia] @Name, @Url, @Title, @Alt, @Description, @ParentId, @Result out, @CreatedFileName out, @CreatedId out", param);
+            return new string[] { Convert.ToString(param[6].Value), Convert.ToString(param[7].Value), Convert.ToString(param[8].Value) };
         }
 
         public async Task<string> UploadMedia(IFormFile file, string fileName)
@@ -474,48 +455,45 @@ namespace CMS.Controllers
         public Media GetMediaById(int id)
         {
             Media media = new Media();
-            using (var context = new CMSContext())
-            {
-                var param = new SqlParameter[] {
+            var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@Id",
                                         SqlDbType =  System.Data.SqlDbType.Int,
                                         Direction = System.Data.ParameterDirection.Input,
                                         Value = id
                                     }};
-                var resultList = context.Media.FromSqlRaw("[dbo].[sp_GetMediaById] @id", param).AsEnumerable();
+            var resultList = context.Media.FromSqlRaw("[dbo].[sp_GetMediaById] @id", param).AsEnumerable();
 
-                if (resultList != null)
+            if (resultList != null)
+            {
+                media = resultList.AsEnumerable().FirstOrDefault();
+                media.DisplayUrl = "images/file-icon.png";
+
+                long fileSize = new FileInfo(Path.Combine(hostingEnvironment.WebRootPath, Convert.ToString(resultList.Select(x => x.Url).FirstOrDefault()))).Length;
+
+                float fileSizeValue;
+                if (fileSize > 1024 * 1024)
                 {
-                    media = resultList.AsEnumerable().FirstOrDefault();
-                    media.DisplayUrl = "images/file-icon.png";
+                    fileSizeValue = (float)fileSize / (1024 * 1024);
+                    media.FileSize = fileSizeValue.ToString("0.00") + "MB";
+                }
+                else if (fileSize > 1024)
+                {
+                    fileSizeValue = (float)fileSize / 1024;
+                    media.FileSize = fileSizeValue.ToString("0.00") + "KB";
+                }
+                else
+                {
+                    fileSizeValue = fileSize;
+                    media.FileSize = fileSizeValue + "Bytes";
+                }
 
-                    long fileSize = new FileInfo(Path.Combine(hostingEnvironment.WebRootPath, Convert.ToString(resultList.Select(x => x.Url).FirstOrDefault()))).Length;
-
-                    float fileSizeValue;
-                    if (fileSize > 1024 * 1024)
-                    {
-                        fileSizeValue = (float)fileSize / (1024 * 1024);
-                        media.FileSize = fileSizeValue.ToString("0.00") + "MB";
-                    }
-                    else if (fileSize > 1024)
-                    {
-                        fileSizeValue = (float)fileSize / 1024;
-                        media.FileSize = fileSizeValue.ToString("0.00") + "KB";
-                    }
-                    else
-                    {
-                        fileSizeValue = fileSize;
-                        media.FileSize = fileSizeValue + "Bytes";
-                    }
-
-                    media.FileType = Path.GetExtension(Convert.ToString(resultList.Select(x => x.Name).FirstOrDefault()));
-                    if (IsImage(Convert.ToString(resultList.Select(x => x.Name).FirstOrDefault())))
-                    {
-                        var image = Image.FromFile(Path.Combine(hostingEnvironment.WebRootPath, Convert.ToString(resultList.Select(x => x.Url).FirstOrDefault())));
-                        media.Dimension = image.Width + "*" + image.Height;
-                        media.DisplayUrl = Convert.ToString(resultList.Select(x => x.Url).FirstOrDefault());
-                    }
+                media.FileType = Path.GetExtension(Convert.ToString(resultList.Select(x => x.Name).FirstOrDefault()));
+                if (IsImage(Convert.ToString(resultList.Select(x => x.Name).FirstOrDefault())))
+                {
+                    var image = Image.FromFile(Path.Combine(hostingEnvironment.WebRootPath, Convert.ToString(resultList.Select(x => x.Url).FirstOrDefault())));
+                    media.Dimension = image.Width + "*" + image.Height;
+                    media.DisplayUrl = Convert.ToString(resultList.Select(x => x.Url).FirstOrDefault());
                 }
             }
             return media;

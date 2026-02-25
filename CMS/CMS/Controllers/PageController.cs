@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using CMS.Models;
 using Microsoft.Data.SqlClient;
@@ -15,6 +11,11 @@ namespace CMS.Controllers
     [Authorize(Roles = "Admin")]
     public class PageController : Controller
     {
+        private CMSContext context;
+        public PageController(CMSContext cc)
+        {
+            context = cc;
+        }
         public IActionResult Index(int? id, string searchText, int? status)
         {
             PageList pageList = new PageList();
@@ -27,19 +28,16 @@ namespace CMS.Controllers
             Page page = new Page();
             if (id != null)
             {
-                using (var context = new CMSContext())
-                {
-                    var param = new SqlParameter[] {
+                var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@Id",
                                         SqlDbType =  System.Data.SqlDbType.Int,
                                         Direction = System.Data.ParameterDirection.Input,
                                         Value = id
                                     }};
-                    page = context.Page.FromSqlRaw("[dbo].[sp_GetPageById] @Id", param).AsEnumerable().FirstOrDefault();
-                    ViewBag.Title = "Update Page";
-                    return View(page);
-                }
+                page = context.Page.FromSqlRaw("[dbo].[sp_GetPageById] @Id", param).AsEnumerable().FirstOrDefault();
+                ViewBag.Title = "Update Page";
+                return View(page);
             }
             ViewBag.Title = "Add New Page";
             return View();
@@ -51,11 +49,10 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var context = new CMSContext())
+
+                if (id == null)
                 {
-                    if (id == null)
-                    {
-                        var param = new SqlParameter[] {
+                    var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@Name",
                                         SqlDbType =  System.Data.SqlDbType.VarChar,
@@ -116,15 +113,15 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Output,
                                     }};
 
-                        context.Database.ExecuteSqlRaw("[dbo].[sp_InsertPage] @Name, @Url, @MetaTitle, @MetaKeyword, @MetaDescription, @Description, @Status, @Result out, @CreatedId out", param);
+                    context.Database.ExecuteSqlRaw("[dbo].[sp_InsertPage] @Name, @Url, @MetaTitle, @MetaKeyword, @MetaDescription, @Description, @Status, @Result out, @CreatedId out", param);
 
-                        TempData["result"] = Convert.ToString(param[7].Value);
-                        if (Convert.ToString(param[7].Value) == "Insert Successful")
-                            return RedirectToAction("Add", new { id = Convert.ToInt32(param[8].Value) });
-                    }
-                    else
-                    {
-                        var param = new SqlParameter[] {
+                    TempData["result"] = Convert.ToString(param[7].Value);
+                    if (Convert.ToString(param[7].Value) == "Insert Successful")
+                        return RedirectToAction("Add", new { id = Convert.ToInt32(param[8].Value) });
+                }
+                else
+                {
+                    var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@Id",
                                         SqlDbType =  System.Data.SqlDbType.Int,
@@ -191,12 +188,12 @@ namespace CMS.Controllers
                                         Direction = System.Data.ParameterDirection.Output,
                                         Size=100
                                     }};
-                        context.Database.ExecuteSqlRaw("[dbo].[sp_UpdatePage] @Id, @Name, @Url, @MetaTitle, @MetaKeyword, @MetaDescription, @Description, @Status, @Result out, @CreatedUrl out", param);
-                        ModelState.Clear();
-                        page.Url = Convert.ToString(param[9].Value);
-                        TempData["result"] = Convert.ToString(param[8].Value);
-                    }
+                    context.Database.ExecuteSqlRaw("[dbo].[sp_UpdatePage] @Id, @Name, @Url, @MetaTitle, @MetaKeyword, @MetaDescription, @Description, @Status, @Result out, @CreatedUrl out", param);
+                    ModelState.Clear();
+                    page.Url = Convert.ToString(param[9].Value);
+                    TempData["result"] = Convert.ToString(param[8].Value);
                 }
+
             }
             ViewBag.Title = id == null ? "Add New Page" : "Update Page";
             return View(page);
@@ -211,9 +208,7 @@ namespace CMS.Controllers
                 result = "Select at least 1 item";
             else
             {
-                using (var context = new CMSContext())
-                {
-                    var param = new SqlParameter[] {
+                var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@Id",
                                         SqlDbType =  System.Data.SqlDbType.VarChar,
@@ -235,9 +230,8 @@ namespace CMS.Controllers
                                         Size = 50
                                     }
                     };
-                    context.Database.ExecuteSqlRaw("[dbo].[sp_UpdateBulkPageStatus] @Id, @Status, @Result out", param);
-                    result = Convert.ToString(param[2].Value);
-                }
+                context.Database.ExecuteSqlRaw("[dbo].[sp_UpdateBulkPageStatus] @Id, @Status, @Result out", param);
+                result = Convert.ToString(param[2].Value);
             }
             return result;
         }
@@ -250,9 +244,7 @@ namespace CMS.Controllers
             List<Page> list = new List<Page>();
             PageExtraData pageExtraData = new PageExtraData();
             PageList pageList = new PageList();
-            using (var context = new CMSContext())
-            {
-                var param = new SqlParameter[] {
+            var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@PageNo",
                                         SqlDbType =  System.Data.SqlDbType.Int,
@@ -281,53 +273,52 @@ namespace CMS.Controllers
                                          Value=status ?? (object)DBNull.Value
                                     }
                 };
-                using (var cnn = context.Database.GetDbConnection())
+            using (var cnn = context.Database.GetDbConnection())
+            {
+                var cmm = cnn.CreateCommand();
+                cmm.CommandType = System.Data.CommandType.StoredProcedure;
+                cmm.CommandText = "[dbo].[sp_GetPageWithPaging]";
+                cmm.Parameters.AddRange(param);
+                cmm.Connection = cnn;
+                cnn.Open();
+                var reader = cmm.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    var cmm = cnn.CreateCommand();
-                    cmm.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmm.CommandText = "[dbo].[sp_GetPageWithPaging]";
-                    cmm.Parameters.AddRange(param);
-                    cmm.Connection = cnn;
-                    cnn.Open();
-                    var reader = cmm.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        Page pages = new Page();
-                        pages.Id = Convert.ToInt32(reader["Id"]);
-                        pages.Name = Convert.ToString(reader["Name"]);
-                        pages.Url = Convert.ToString(reader["Url"]);
-                        pages.MetaTitle = Convert.ToString(reader["MetaTitle"]);
-                        pages.MetaKeyword = Convert.ToString(reader["MetaKeyword"]);
-                        pages.MetaDescription = Convert.ToString(reader["MetaDescription"]);
-                        pages.Description = Convert.ToString(reader["Description"]);
-                        pages.AddedOn = Convert.ToDateTime(reader["AddedOn"]);
-                        pages.Status = Convert.ToBoolean(reader["Status"]);
-                        list.Add(pages);
-                    }
-                    reader.NextResult();
-                    while (reader.Read())
-                    {
-                        PagingInfo pagingInfo = new PagingInfo();
-                        pagingInfo.CurrentPage = pageNo;
-                        pagingInfo.TotalItems = Convert.ToInt32(reader["Total"]);
-                        pagingInfo.ItemsPerPage = pageSize;
-
-                        pageList.page = list;
-                        pageList.allTotalPage = Convert.ToInt32(reader["AllTotalPage"]);
-                        pageList.activeTotalPage = Convert.ToInt32(reader["ActiveTotalPage"]);
-                        pageList.inactiveTotalPage = Convert.ToInt32(reader["InActiveTotalPage"]);
-                        pageList.searchText = searchText;
-                        pageList.status = status;
-                        pageList.pagingInfo = pagingInfo;
-                    }
+                    Page pages = new Page();
+                    pages.Id = Convert.ToInt32(reader["Id"]);
+                    pages.Name = Convert.ToString(reader["Name"]);
+                    pages.Url = Convert.ToString(reader["Url"]);
+                    pages.MetaTitle = Convert.ToString(reader["MetaTitle"]);
+                    pages.MetaKeyword = Convert.ToString(reader["MetaKeyword"]);
+                    pages.MetaDescription = Convert.ToString(reader["MetaDescription"]);
+                    pages.Description = Convert.ToString(reader["Description"]);
+                    pages.AddedOn = Convert.ToDateTime(reader["AddedOn"]);
+                    pages.Status = Convert.ToBoolean(reader["Status"]);
+                    list.Add(pages);
                 }
-                //var result = context.sp_GetPageWithPaging(pageNo, searchText, pageSize, status);
-                //list = result.Select(x => new Models.Page() { id = x.Id, name = x.Name, url = x.Url, metaTitle = x.MetaTitle, metaKeyword = x.MetaKeyword, metaDescription = x.MetaDescription, description = x.Description, addedOn = x.AddedOn, status = Convert.ToInt32(x.Status) }).ToList();
+                reader.NextResult();
+                while (reader.Read())
+                {
+                    PagingInfo pagingInfo = new PagingInfo();
+                    pagingInfo.CurrentPage = pageNo;
+                    pagingInfo.TotalItems = Convert.ToInt32(reader["Total"]);
+                    pagingInfo.ItemsPerPage = pageSize;
 
-                //var pageExtraDataResult = result.GetNextResult<sp_PageExtraData>();
-                //pageExtraData = pageExtraDataResult.ToList().FirstOrDefault();
+                    pageList.page = list;
+                    pageList.allTotalPage = Convert.ToInt32(reader["AllTotalPage"]);
+                    pageList.activeTotalPage = Convert.ToInt32(reader["ActiveTotalPage"]);
+                    pageList.inactiveTotalPage = Convert.ToInt32(reader["InActiveTotalPage"]);
+                    pageList.searchText = searchText;
+                    pageList.status = status;
+                    pageList.pagingInfo = pagingInfo;
+                }
             }
+            //var result = context.sp_GetPageWithPaging(pageNo, searchText, pageSize, status);
+            //list = result.Select(x => new Models.Page() { id = x.Id, name = x.Name, url = x.Url, metaTitle = x.MetaTitle, metaKeyword = x.MetaKeyword, metaDescription = x.MetaDescription, description = x.Description, addedOn = x.AddedOn, status = Convert.ToInt32(x.Status) }).ToList();
+
+            //var pageExtraDataResult = result.GetNextResult<sp_PageExtraData>();
+            //pageExtraData = pageExtraDataResult.ToList().FirstOrDefault();
             return pageList;
         }
     }

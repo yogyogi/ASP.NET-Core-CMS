@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using CMS.Models.ViewModels;
-using Microsoft.AspNetCore.Hosting;
 using System.Xml.Serialization;
-using System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CMS.Models;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +13,11 @@ namespace CMS.Controllers
     public class InfoController : Controller
     {
         private IWebHostEnvironment hostingEnvironment;
-
-        public InfoController(IWebHostEnvironment environment)
+        private CMSContext context;
+        public InfoController(IWebHostEnvironment environment, CMSContext cc)
         {
             hostingEnvironment = environment;
+            context = cc;
         }
 
         public IActionResult Index()
@@ -67,7 +62,6 @@ namespace CMS.Controllers
         {
             List<SelectListItem> mediaDateList = new List<SelectListItem>();
             List<MediaDate> mdList = new List<MediaDate>();
-            var context = new CMSContext();
 
             using (var cnn = context.Database.GetDbConnection())
             {
@@ -96,7 +90,6 @@ namespace CMS.Controllers
             //http://webdeveloperplus.com/jquery/create-a-dynamic-scrolling-content-box-using-ajax/ http://stackoverflow.com/questions/8480466/how-to-check-if-scrollbar-is-at-the-bottom
             //http://stackoverflow.com/questions/19933115/mvc-4-postback-on-dropdownlist-change
             System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
-            var context = new CMSContext();
             var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@PageNo",

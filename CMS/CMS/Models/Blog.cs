@@ -13,7 +13,7 @@ namespace CMS.Models
         public int CategoryId { get; set; }
         public int? PrimaryImageId { get; set; }
 
-        public string PrimaryImageUrl { get; set; }
+        public string? PrimaryImageUrl { get; set; }
 
         [Required]
         public string Name { get; set; }

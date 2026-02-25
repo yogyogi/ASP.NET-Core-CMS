@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using CMS.Infrastructure;
 using CMS.Models;
-using System.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using CMS.Models.ViewModels;
 using Newtonsoft.Json;
 
@@ -18,6 +11,12 @@ namespace CMS.Controllers
     public class MenuController : Controller
     {
         // GET: Admin/Menu
+        private CMSContext context;
+
+        public MenuController(CMSContext cc)
+        {
+            context = cc;
+        }
         public IActionResult Index(int? id, string searchText, int? status)
         {
             MenuList list = new MenuList();
@@ -33,25 +32,22 @@ namespace CMS.Controllers
             var skip = pageSize * (Convert.ToInt32(pageNo) - 1);
             MenuList list = new MenuList();
 
-            using (var context = new CMSContext())
-            {
-                var result = context.Menu.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false))).OrderByDescending(x => x.Id).Skip(skip).Take(pageSize).ToList();
+            var result = context.Menu.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false))).OrderByDescending(x => x.Id).Skip(skip).Take(pageSize).ToList();
 
-                int total = context.Menu.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false))).Count();
+            int total = context.Menu.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false))).Count();
 
-                PagingInfo pagingInfo = new PagingInfo();
-                pagingInfo.CurrentPage = pageNo;
-                pagingInfo.TotalItems = total;
-                pagingInfo.ItemsPerPage = pageSize;
+            PagingInfo pagingInfo = new PagingInfo();
+            pagingInfo.CurrentPage = pageNo;
+            pagingInfo.TotalItems = total;
+            pagingInfo.ItemsPerPage = pageSize;
 
-                list.menu = result;
-                list.allTotal = context.Menu.Count();
-                list.activeTotal = context.Menu.Where(x => x.Status == true).Count();
-                list.inactiveTotal = context.Menu.Where(x => x.Status == false).Count();
-                list.searchText = searchText;
-                list.status = status;
-                list.pagingInfo = pagingInfo;
-            }
+            list.menu = result;
+            list.allTotal = context.Menu.Count();
+            list.activeTotal = context.Menu.Where(x => x.Status == true).Count();
+            list.inactiveTotal = context.Menu.Where(x => x.Status == false).Count();
+            list.searchText = searchText;
+            list.status = status;
+            list.pagingInfo = pagingInfo;
 
             return list;
         }
@@ -61,13 +57,10 @@ namespace CMS.Controllers
             Menu menu = new Menu();
             if (id != null)
             {
-                using (var context = new CMSContext())
-                {
-                    menu = context.Menu.Where(x => x.Id == id).FirstOrDefault();
-                    BindMenu(menu);
-                    ViewBag.Title = "Update Menu";
-                    return View(menu);
-                }
+                menu = context.Menu.Where(x => x.Id == id).FirstOrDefault();
+                BindMenu(menu);
+                ViewBag.Title = "Update Menu";
+                return View(menu);
             }
 
             ViewBag.Title = "Add New Menu";
@@ -79,30 +72,27 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var context = new CMSContext())
+                if (id == null)
                 {
-                    if (id == null)
-                    {
-                        context.Menu.Add(menu);
-                        int result = context.SaveChanges();
+                    context.Menu.Add(menu);
+                    int result = context.SaveChanges();
 
-                        TempData["result"] = result == 1 ? "Insert Successful" : "Failed";
-                        if (result == 1)
-                            return RedirectToAction("add", new { id = menu.Id });
-                    }
-                    else
-                    {
-                        var menuResult = context.Menu.Where(x => x.Id == id).FirstOrDefault();
-                        menuResult.Id = menu.Id;
-                        menuResult.Name = menu.Name;
-                        menuResult.Item = menu.Item;
-                        menuResult.Status = Convert.ToBoolean(menu.Status);
+                    TempData["result"] = result == 1 ? "Insert Successful" : "Failed";
+                    if (result == 1)
+                        return RedirectToAction("add", new { id = menu.Id });
+                }
+                else
+                {
+                    var menuResult = context.Menu.Where(x => x.Id == id).FirstOrDefault();
+                    menuResult.Id = menu.Id;
+                    menuResult.Name = menu.Name;
+                    menuResult.Item = menu.Item;
+                    menuResult.Status = Convert.ToBoolean(menu.Status);
 
-                        int result = context.SaveChanges();
-                        ModelState.Clear();
-                        BindMenu(menu);
-                        TempData["result"] = result == 1 ? "Update Successful" : "Failed";
-                    }
+                    int result = context.SaveChanges();
+                    ModelState.Clear();
+                    BindMenu(menu);
+                    TempData["result"] = result == 1 ? "Update Successful" : "Failed";
                 }
             }
             ViewBag.Title = id == null ? "Add New Menu" : "Update Menu";
@@ -168,13 +158,10 @@ namespace CMS.Controllers
                 result = "Select at least 1 item";
             else
             {
-                using (var context = new CMSContext())
-                {
-                    var menu = context.Menu.Where(x => idChecked.Contains(x.Id.ToString())).ToList();
-                    menu.ForEach(x => x.Status = Convert.ToBoolean(Convert.ToInt32(statusToChange)));
-                    context.SaveChanges().ToString();
-                    result = "Success";
-                }
+                var menu = context.Menu.Where(x => idChecked.Contains(x.Id.ToString())).ToList();
+                menu.ForEach(x => x.Status = Convert.ToBoolean(Convert.ToInt32(statusToChange)));
+                context.SaveChanges().ToString();
+                result = "Success";
             }
             return result;
         }

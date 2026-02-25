@@ -1,15 +1,10 @@
 ﻿using CMS.Infrastructure;
 using CMS.Models;
 using CMS.Models.ViewModels;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting.Internal;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace CMS.Components
@@ -17,10 +12,12 @@ namespace CMS.Components
     public class SiteInfo : ViewComponent
     {
         private IWebHostEnvironment hostingEnvironment;
-
-        public SiteInfo(IWebHostEnvironment environment)
+        private CMSContext context;
+        public SiteInfo(IWebHostEnvironment environment, CMSContext cc)
         {
             hostingEnvironment = environment;
+            context = cc;
+
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
@@ -52,13 +49,16 @@ namespace CMS.Components
 
     public class SiteMenu : ViewComponent
     {
+        private CMSContext context;
+        public SiteMenu(CMSContext cc)
+        {
+            context = cc;
+
+        }
         public async Task<IViewComponentResult> InvokeAsync()
         {
             Menu menu = new Menu();
-            using (var context = new CMSContext())
-            {
-                menu =  await context.Menu.Where(x => x.Name == "Main" && x.Status == true).FirstOrDefaultAsync();
-            }
+            menu = await context.Menu.Where(x => x.Name == "Main" && x.Status == true).FirstOrDefaultAsync();
             return View((object)BindMenu(menu));
         }
 

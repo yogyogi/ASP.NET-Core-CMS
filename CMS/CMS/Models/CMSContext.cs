@@ -1,13 +1,12 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
-using CMS.Models.ViewModels;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace CMS.Models
 {
     public class CMSContext : DbContext
     {
+        public CMSContext(DbContextOptions<CMSContext> options) : base(options)
+        {
+        }
         public DbSet<Blog> Blog { get; set; }
         public DbSet<BlogCategory> BlogCategory { get; set; }
         public DbSet<Media> Media { get; set; }
@@ -21,9 +20,8 @@ namespace CMS.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseSqlServer(@"Server=vaio;Database=Goldentaurus;Trusted_Connection=True;");
-                IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build();
-                optionsBuilder.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);
+                /*IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build();
+                optionsBuilder.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);*/
             }
         }
 

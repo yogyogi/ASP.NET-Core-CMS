@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace CMS.Migrations.CMS
 {
     [DbContext(typeof(CMSContext))]
@@ -15,16 +17,18 @@ namespace CMS.Migrations.CMS
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.2");
+                .HasAnnotation("ProductVersion", "10.0.3")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("CMS.Models.Blog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("AddedOn")
                         .ValueGeneratedOnAdd()
@@ -40,16 +44,19 @@ namespace CMS.Migrations.CMS
                         .HasColumnType("varchar(max)");
 
                     b.Property<string>("MetaDescription")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
                     b.Property<string>("MetaKeyword")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
                     b.Property<string>("MetaTitle")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
@@ -81,8 +88,9 @@ namespace CMS.Migrations.CMS
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("AddedOn")
                         .ValueGeneratedOnAdd()
@@ -95,16 +103,19 @@ namespace CMS.Migrations.CMS
                         .HasColumnType("varchar(max)");
 
                     b.Property<string>("MetaDescription")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
                     b.Property<string>("MetaKeyword")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
                     b.Property<string>("MetaTitle")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
@@ -136,8 +147,9 @@ namespace CMS.Migrations.CMS
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("AddedOn")
                         .ValueGeneratedOnAdd()
@@ -183,8 +195,9 @@ namespace CMS.Migrations.CMS
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("AddedOn")
                         .ValueGeneratedOnAdd()
@@ -215,8 +228,9 @@ namespace CMS.Migrations.CMS
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("AddedOn")
                         .ValueGeneratedOnAdd()
@@ -233,6 +247,7 @@ namespace CMS.Migrations.CMS
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("ValidatedBy")
+                        .IsRequired()
                         .HasMaxLength(10)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(10)");
@@ -246,8 +261,9 @@ namespace CMS.Migrations.CMS
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("AddedOn")
                         .ValueGeneratedOnAdd()
@@ -260,16 +276,19 @@ namespace CMS.Migrations.CMS
                         .HasColumnType("varchar(max)");
 
                     b.Property<string>("MetaDescription")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
                     b.Property<string>("MetaKeyword")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
                     b.Property<string>("MetaTitle")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");

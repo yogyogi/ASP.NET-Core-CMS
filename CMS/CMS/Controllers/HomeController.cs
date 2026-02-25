@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using CMS.Models;
 using CMS.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using System.Data.SqlClient;
 using CMS.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 
@@ -16,42 +9,36 @@ namespace CMS.Controllers
 {
     public class HomeController : Controller
     {
+        private CMSContext context;
+
         private UserManager<AppUser> userManager;
-        public HomeController(UserManager<AppUser> userMgr)
+        public HomeController(UserManager<AppUser> userMgr, CMSContext cc)
         {
             userManager = userMgr;
+            context = cc;
         }
 
         public IActionResult Index()
         {
             Page page = new Page();
-            using (var context = new CMSContext())
-            {
-                page = context.Page.Where(t => t.Name == "Home").FirstOrDefault();
-            }
+            page = context.Page.Where(t => t.Name == "Home").FirstOrDefault();
             return View(page);
         }
 
         public IActionResult Page(string name)
         {
             Page page = new Page();
-            using (var context = new CMSContext())
-            {
-                page = context.Page.Where(t => t.Url == name).FirstOrDefault();
-            }
+            page = context.Page.Where(t => t.Url == name).FirstOrDefault();
             return View("Index", page);
         }
 
         public IActionResult ViewBlog(string name)
         {
             Blog blog = new Blog();
-            using (var context = new CMSContext())
-            {
-                blog = context.Blog.Where(t => t.Url == name).FirstOrDefault();
-                blog.PrimaryImageUrl = blog.PrimaryImageId != null ? "/" + context.Media.Where(x => x.Id == blog.PrimaryImageId).Select(x => x.Url).FirstOrDefault() : "/images/addphoto.jpg";
+            blog = context.Blog.Where(t => t.Url == name).FirstOrDefault();
+            blog.PrimaryImageUrl = blog.PrimaryImageId != null ? "/" + context.Media.Where(x => x.Id == blog.PrimaryImageId).Select(x => x.Url).FirstOrDefault() : "/images/addphoto.jpg";
 
-                ViewBag.BlogCategory = context.BlogCategory.Where(t => t.Status == true).ToList();
-            }
+            ViewBag.BlogCategory = context.BlogCategory.Where(t => t.Status == true).ToList();
             return View(blog);
         }
 
@@ -60,14 +47,11 @@ namespace CMS.Controllers
             BlogList list = new BlogList();
 
             BlogCategory blogCategory = new BlogCategory();
-            using (var context = new CMSContext())
-            {
-                blogCategory = context.BlogCategory.Where(x => x.Url == url).FirstOrDefault();
-            }
+            blogCategory = context.BlogCategory.Where(x => x.Url == url).FirstOrDefault();
 
             list = GetBlog(id, null, 1, blogCategory.Id);
 
-            ViewData["Meta"]= new string[3] { blogCategory.Name, "", "Welcome to My Blogs" };
+            ViewData["Meta"] = new string[3] { blogCategory.Name, "", "Welcome to My Blogs" };
             ViewBag.url = url;
             return View("MyBlog", list);
         }
@@ -90,26 +74,23 @@ namespace CMS.Controllers
             var skip = pageSize * (Convert.ToInt32(pageNo) - 1);
 
             BlogList bList = new BlogList();
-            using (var context = new CMSContext())
-            {
-                var result = context.Blog.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false)) && x.Name.Contains(searchText == null ? x.Name : searchText) && (blogCategoryId == 0 || x.CategoryId == blogCategoryId)).OrderByDescending(x => x.Id).Skip(skip).Take(pageSize).ToList();
-                result.ForEach(u => u.PrimaryImageUrl = u.PrimaryImageId != null ? "/" + context.Media.Where(x => x.Id == u.PrimaryImageId).Select(x => x.Url).FirstOrDefault() : "/images/addphoto.jpg");
+            var result = context.Blog.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false)) && x.Name.Contains(searchText == null ? x.Name : searchText) && (blogCategoryId == 0 || x.CategoryId == blogCategoryId)).OrderByDescending(x => x.Id).Skip(skip).Take(pageSize).ToList();
+            result.ForEach(u => u.PrimaryImageUrl = u.PrimaryImageId != null ? "/" + context.Media.Where(x => x.Id == u.PrimaryImageId).Select(x => x.Url).FirstOrDefault() : "/images/addphoto.jpg");
 
-                int total = context.Blog.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false)) && x.Name.Contains(searchText == null ? x.Name : searchText) && (blogCategoryId == 0 || x.CategoryId == blogCategoryId)).Count();
+            int total = context.Blog.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false)) && x.Name.Contains(searchText == null ? x.Name : searchText) && (blogCategoryId == 0 || x.CategoryId == blogCategoryId)).Count();
 
-                PagingInfo pagingInfo = new PagingInfo();
-                pagingInfo.CurrentPage = pageNo;
-                pagingInfo.TotalItems = total;
-                pagingInfo.ItemsPerPage = pageSize;
+            PagingInfo pagingInfo = new PagingInfo();
+            pagingInfo.CurrentPage = pageNo;
+            pagingInfo.TotalItems = total;
+            pagingInfo.ItemsPerPage = pageSize;
 
-                bList.blog = result;
-                bList.allTotal = context.Blog.Count();
-                bList.activeTotal = context.Blog.Where(x => x.Status == true).Count();
-                bList.inactiveTotal = context.Blog.Where(x => x.Status == false).Count();
-                bList.searchText = searchText;
-                bList.status = null;
-                bList.pagingInfo = pagingInfo;
-            }
+            bList.blog = result;
+            bList.allTotal = context.Blog.Count();
+            bList.activeTotal = context.Blog.Where(x => x.Status == true).Count();
+            bList.inactiveTotal = context.Blog.Where(x => x.Status == false).Count();
+            bList.searchText = searchText;
+            bList.status = null;
+            bList.pagingInfo = pagingInfo;
             return bList;
         }
     }

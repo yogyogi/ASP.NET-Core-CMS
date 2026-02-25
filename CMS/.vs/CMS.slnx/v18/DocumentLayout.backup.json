@@ -1,0 +1,195 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|d:\\yogesh\\seo\\yogihosting\\cms\\cms\\cms\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|solutionrelative:cms\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|d:\\yogesh\\seo\\yogihosting\\cms\\cms\\cms\\models\\blog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|solutionrelative:cms\\models\\blog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|d:\\yogesh\\seo\\yogihosting\\cms\\cms\\cms\\views\\blog\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|solutionrelative:cms\\views\\blog\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|d:\\yogesh\\seo\\yogihosting\\cms\\cms\\cms\\controllers\\mediacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|solutionrelative:cms\\controllers\\mediacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|d:\\yogesh\\seo\\yogihosting\\cms\\cms\\cms\\infrastructure\\createstoredprocedure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|solutionrelative:cms\\infrastructure\\createstoredprocedure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|d:\\yogesh\\seo\\yogihosting\\cms\\cms\\cms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|solutionrelative:cms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|d:\\yogesh\\seo\\yogihosting\\cms\\cms\\cms\\models\\cmscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E602B07-97E1-7A0A-4EB1-ECD52404957F}|CMS\\CMS.csproj|solutionrelative:cms\\models\\cmscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 16,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:138:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:139:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:140:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Blog.cs",
+              "DocumentMoniker": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Models\\Blog.cs",
+              "RelativeDocumentMoniker": "CMS\\Models\\Blog.cs",
+              "ToolTip": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Models\\Blog.cs",
+              "RelativeToolTip": "CMS\\Models\\Blog.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-25T05:33:33.996Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Add.cshtml",
+              "DocumentMoniker": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Views\\Blog\\Add.cshtml",
+              "RelativeDocumentMoniker": "CMS\\Views\\Blog\\Add.cshtml",
+              "ToolTip": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Views\\Blog\\Add.cshtml",
+              "RelativeToolTip": "CMS\\Views\\Blog\\Add.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-25T05:31:44.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BlogController.cs",
+              "DocumentMoniker": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Controllers\\BlogController.cs",
+              "RelativeDocumentMoniker": "CMS\\Controllers\\BlogController.cs",
+              "ToolTip": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Controllers\\BlogController.cs",
+              "RelativeToolTip": "CMS\\Controllers\\BlogController.cs",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAIwIoAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T17:47:05.455Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MediaController.cs",
+              "DocumentMoniker": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Controllers\\MediaController.cs",
+              "RelativeDocumentMoniker": "CMS\\Controllers\\MediaController.cs",
+              "ToolTip": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Controllers\\MediaController.cs",
+              "RelativeToolTip": "CMS\\Controllers\\MediaController.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAowHgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T13:36:40.195Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CMSContext.cs",
+              "DocumentMoniker": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Models\\CMSContext.cs",
+              "RelativeDocumentMoniker": "CMS\\Models\\CMSContext.cs",
+              "ToolTip": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Models\\CMSContext.cs",
+              "RelativeToolTip": "CMS\\Models\\CMSContext.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAIwCsAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T18:30:48.594Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CreateStoredProcedure.cs",
+              "DocumentMoniker": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Infrastructure\\CreateStoredProcedure.cs",
+              "RelativeDocumentMoniker": "CMS\\Infrastructure\\CreateStoredProcedure.cs",
+              "ToolTip": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Infrastructure\\CreateStoredProcedure.cs",
+              "RelativeToolTip": "CMS\\Infrastructure\\CreateStoredProcedure.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T05:07:59.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Program.cs",
+              "RelativeDocumentMoniker": "CMS\\Program.cs",
+              "ToolTip": "D:\\Yogesh\\SEO\\Yogihosting\\CMS\\CMS\\CMS\\Program.cs",
+              "RelativeToolTip": "CMS\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T17:53:36.341Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

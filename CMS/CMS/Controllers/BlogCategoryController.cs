@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using CMS.Infrastructure;
 using CMS.Models;
@@ -16,6 +12,12 @@ namespace CMS.Controllers
     [Authorize(Roles = "Admin")]
     public class BlogCategoryController : Controller
     {
+        private CMSContext context;
+        public BlogCategoryController(CMSContext cc)
+        {
+            context = cc;
+        }
+
         public IActionResult Index(int? id, string searchText, int? status)
         {
             BlogCategoryList list = new BlogCategoryList();
@@ -29,7 +31,6 @@ namespace CMS.Controllers
 
             if (id != null)
             {
-                var context = new CMSContext();
                 var result = context.BlogCategory.Where(x => x.Id == id).FirstOrDefault();
                 ViewBag.Title = "Update Blog Category";
                 return View(result);
@@ -46,7 +47,6 @@ namespace CMS.Controllers
 
             if (ModelState.IsValid)
             {
-                var context = new CMSContext();
                 if (id == null)
                 {
                     var param = new SqlParameter[] {
@@ -158,7 +158,6 @@ namespace CMS.Controllers
         List<SelectListItem> GetActiveCategory()
         {
             List<SelectListItem> activeBlogCategory = new List<SelectListItem>();
-            var context = new CMSContext();
             activeBlogCategory = context.BlogCategory.Where(x => x.Status == true).Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
             return activeBlogCategory;
         }
@@ -172,9 +171,7 @@ namespace CMS.Controllers
                 result = "Select at least 1 item";
             else
             {
-                using (var context = new CMSContext())
-                {
-                    var param = new SqlParameter[] {
+                var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@Id",
                                         SqlDbType =  System.Data.SqlDbType.VarChar,
@@ -196,9 +193,8 @@ namespace CMS.Controllers
                                         Size = 50
                                     }
                     };
-                    context.Database.ExecuteSqlRaw("[dbo].[sp_UpdateBulkBlogCategoryStatus] @Id, @Status, @Result out", param);
-                    result = Convert.ToString(param[2].Value);
-                }
+                context.Database.ExecuteSqlRaw("[dbo].[sp_UpdateBulkBlogCategoryStatus] @Id, @Status, @Result out", param);
+                result = Convert.ToString(param[2].Value);
             }
             return result;
         }
@@ -207,7 +203,6 @@ namespace CMS.Controllers
         {
             int pageSize = 3;
             int pageNo = page == null ? 1 : Convert.ToInt32(page);
-            var context = new CMSContext();
             var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@PageNo",
@@ -253,36 +248,36 @@ namespace CMS.Controllers
                 PagingInfo pagingInfo = new PagingInfo();
                 //while (reader.HasRows)
                 //{
-                    while (reader.Read())
-                    {
-                        BlogCategory blogCategory = new BlogCategory();
-                        blogCategory.Id = Convert.ToInt32(reader["Id"]);
-                        blogCategory.ParentId = reader["ParentId"] == DBNull.Value ? null : (Int32?)Convert.ToInt32(reader["ParentId"]);
-                        blogCategory.Name = Convert.ToString(reader["Name"]);
-                        blogCategory.Url = Convert.ToString(reader["Url"]);
-                        blogCategory.MetaTitle = Convert.ToString(reader["MetaTitle"]);
-                        blogCategory.MetaKeyword = Convert.ToString(reader["MetaKeyword"]);
-                        blogCategory.MetaDescription = Convert.ToString(reader["MetaDescription"]);
-                        blogCategory.Description = Convert.ToString(reader["Description"]);
-                        blogCategory.AddedOn = Convert.ToDateTime(reader["AddedOn"]);
-                        blogCategory.Status = Convert.ToBoolean(reader["Status"]);
-                        list.Add(blogCategory);
-                    }
-                    reader.NextResult();
-                    while (reader.Read())
-                    {
-                        pagingInfo.CurrentPage = pageNo;
-                        pagingInfo.TotalItems = Convert.ToInt32(reader["Total"]);
-                        pagingInfo.ItemsPerPage = pageSize;
+                while (reader.Read())
+                {
+                    BlogCategory blogCategory = new BlogCategory();
+                    blogCategory.Id = Convert.ToInt32(reader["Id"]);
+                    blogCategory.ParentId = reader["ParentId"] == DBNull.Value ? null : (Int32?)Convert.ToInt32(reader["ParentId"]);
+                    blogCategory.Name = Convert.ToString(reader["Name"]);
+                    blogCategory.Url = Convert.ToString(reader["Url"]);
+                    blogCategory.MetaTitle = Convert.ToString(reader["MetaTitle"]);
+                    blogCategory.MetaKeyword = Convert.ToString(reader["MetaKeyword"]);
+                    blogCategory.MetaDescription = Convert.ToString(reader["MetaDescription"]);
+                    blogCategory.Description = Convert.ToString(reader["Description"]);
+                    blogCategory.AddedOn = Convert.ToDateTime(reader["AddedOn"]);
+                    blogCategory.Status = Convert.ToBoolean(reader["Status"]);
+                    list.Add(blogCategory);
+                }
+                reader.NextResult();
+                while (reader.Read())
+                {
+                    pagingInfo.CurrentPage = pageNo;
+                    pagingInfo.TotalItems = Convert.ToInt32(reader["Total"]);
+                    pagingInfo.ItemsPerPage = pageSize;
 
-                        bcList.blogCategory = list;
-                        bcList.allTotal = Convert.ToInt32(reader["AllTotalPage"]);
-                        bcList.activeTotal = Convert.ToInt32(reader["ActiveTotalPage"]);
-                        bcList.inactiveTotal = Convert.ToInt32(reader["InActiveTotalPage"]);
-                        bcList.searchText = searchText;
-                        bcList.status = status;
-                        bcList.pagingInfo = pagingInfo;
-                    }
+                    bcList.blogCategory = list;
+                    bcList.allTotal = Convert.ToInt32(reader["AllTotalPage"]);
+                    bcList.activeTotal = Convert.ToInt32(reader["ActiveTotalPage"]);
+                    bcList.inactiveTotal = Convert.ToInt32(reader["InActiveTotalPage"]);
+                    bcList.searchText = searchText;
+                    bcList.status = status;
+                    bcList.pagingInfo = pagingInfo;
+                }
                 //}
             }
             return bcList;

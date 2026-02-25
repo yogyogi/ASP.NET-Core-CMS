@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CMS.Models;
@@ -16,6 +12,12 @@ namespace CMS.Controllers
     [Authorize(Roles = "Admin")]
     public class BlogController : Controller
     {
+        private CMSContext context;
+        public BlogController(CMSContext cc)
+        {
+            context = cc;
+        }
+
         public ActionResult Index(int? id, string searchText, int? status)
         {
             BlogList list = new BlogList();
@@ -26,19 +28,18 @@ namespace CMS.Controllers
         public ActionResult Add(int? id)
         {
             ViewBag.CategoryList = GetActiveCategory();
-            ViewBag.MediaDate = GetMediaDate();
+            
 
             Blog blog = new Blog();
             blog.PrimaryImageUrl = "/images/addphoto.jpg";
             if (id != null)
             {
-                var context = new CMSContext();
                 blog = context.Blog.Where(x => x.Id == id).FirstOrDefault();
                 blog.PrimaryImageUrl = blog.PrimaryImageId != null ? "/" + context.Media.Where(x => x.Id == blog.PrimaryImageId).Select(x => x.Url).FirstOrDefault() : "/images/addphoto.jpg";
                 ViewBag.Title = "Update Blog";
                 return View(blog);
             }
-
+            ViewBag.MediaDate = GetMediaDate();
             ViewBag.Title = "Add New Blog";
             return View(blog);
         }
@@ -48,11 +49,9 @@ namespace CMS.Controllers
         public ActionResult Add(Blog blog, int? id)
         {
             ViewBag.CategoryList = GetActiveCategory();
-            ViewBag.MediaDate = GetMediaDate();
 
             if (ModelState.IsValid)
             {
-                var context = new CMSContext();
                 if (id == null)
                 {
                     var param = new SqlParameter[] {
@@ -156,6 +155,8 @@ namespace CMS.Controllers
                 }
                 blog.PrimaryImageUrl = blog.PrimaryImageUrl ?? "~/images/addphoto.jpg";
             }
+            ViewBag.MediaDate = GetMediaDate();
+
             ViewBag.Title = id == null ? "Add New Blog" : "Update Blog";
             return View(blog);
         }
@@ -163,7 +164,6 @@ namespace CMS.Controllers
         List<SelectListItem> GetActiveCategory()
         {
             List<SelectListItem> activeBlogCategory = new List<SelectListItem>();
-            var context = new CMSContext();
             activeBlogCategory = context.BlogCategory.Where(x => x.Status == true).Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
             return activeBlogCategory;
         }
@@ -172,7 +172,6 @@ namespace CMS.Controllers
         {
             List<SelectListItem> mediaDateList = new List<SelectListItem>();
             List<MediaDate> mdList = new List<MediaDate>();
-            var context = new CMSContext();
 
             /*Does not work https://docs.microsoft.com/en-us/ef/core/querying/raw-sql
             DbSet<MediaDate> set = context.Set<MediaDate>();
@@ -206,7 +205,6 @@ namespace CMS.Controllers
             //http://webdeveloperplus.com/jquery/create-a-dynamic-scrolling-content-box-using-ajax/ http://stackoverflow.com/questions/8480466/how-to-check-if-scrollbar-is-at-the-bottom
             //http://stackoverflow.com/questions/19933115/mvc-4-postback-on-dropdownlist-change
             System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
-            var context = new CMSContext();
             var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@PageNo",
@@ -268,27 +266,24 @@ namespace CMS.Controllers
             BlogList bList = new BlogList();
             //if (canPage)
             //{
-            using (var context = new CMSContext())
-            {
-               // bool searchVal = string.IsNullOrEmpty(searchText);
+            // bool searchVal = string.IsNullOrEmpty(searchText);
 
-                var result = context.Blog.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false)) && x.Name.Contains(searchText == null ? x.Name : searchText)).OrderByDescending(x => x.Id).Skip(skip).Take(pageSize).ToList();
+            var result = context.Blog.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false)) && x.Name.Contains(searchText == null ? x.Name : searchText)).OrderByDescending(x => x.Id).Skip(skip).Take(pageSize).ToList();
 
-                int total = context.Blog.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false)) && x.Name.Contains(searchText == null ? x.Name : searchText)).Count();
+            int total = context.Blog.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false)) && x.Name.Contains(searchText == null ? x.Name : searchText)).Count();
 
-                PagingInfo pagingInfo = new PagingInfo();
-                pagingInfo.CurrentPage = pageNo;
-                pagingInfo.TotalItems = total;
-                pagingInfo.ItemsPerPage = pageSize;
+            PagingInfo pagingInfo = new PagingInfo();
+            pagingInfo.CurrentPage = pageNo;
+            pagingInfo.TotalItems = total;
+            pagingInfo.ItemsPerPage = pageSize;
 
-                bList.blog = result;
-                bList.allTotal = context.Blog.Count();
-                bList.activeTotal = context.Blog.Where(x => x.Status == true).Count();
-                bList.inactiveTotal = context.Blog.Where(x => x.Status == false).Count();
-                bList.searchText = searchText;
-                bList.status = status;
-                bList.pagingInfo = pagingInfo;
-            }
+            bList.blog = result;
+            bList.allTotal = context.Blog.Count();
+            bList.activeTotal = context.Blog.Where(x => x.Status == true).Count();
+            bList.inactiveTotal = context.Blog.Where(x => x.Status == false).Count();
+            bList.searchText = searchText;
+            bList.status = status;
+            bList.pagingInfo = pagingInfo;
             //}
             return bList;
         }
@@ -302,13 +297,10 @@ namespace CMS.Controllers
                 result = "Select at least 1 item";
             else
             {
-                using (var context = new CMSContext())
-                {
-                    var blog = context.Blog.Where(x => idChecked.Contains(x.Id.ToString())).ToList();
-                    blog.ForEach(x => x.Status = Convert.ToBoolean(Convert.ToInt32(statusToChange)));
-                    context.SaveChanges().ToString();
-                    result = "Success";
-                }
+                var blog = context.Blog.Where(x => idChecked.Contains(x.Id.ToString())).ToList();
+                blog.ForEach(x => x.Status = Convert.ToBoolean(Convert.ToInt32(statusToChange)));
+                context.SaveChanges().ToString();
+                result = "Success";
             }
             return result;
         }
