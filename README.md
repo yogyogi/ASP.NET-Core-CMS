@@ -1,5 +1,7 @@
 # Shree RAM CMS - the world's first ASP.NET Core CMS
 ## (Now Updated to .NET 10.0)
+### (I have tested it on Feb 25, 2026 by creating a full website from this CMS. Everything is working properly. If you have any questiong on this CMS then message me on twitter.)
+
 ![Shree RAM CMS](https://raw.githubusercontent.com/yogyogi/ASP.NET-Core-CMS/master/sree-ram-cms.png)
 
 This is an Open-Source Content Management System(CMS) developed with [ASP.NET Core](https://www.yogihosting.com/category/aspnet-core/) framework by Microsoft. Use it to create any type of Responsive websites with unlimited pages and unlimited blogs.
