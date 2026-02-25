@@ -30,7 +30,7 @@ You need to follow the following Steps:
 
 Then open the `appsettings.json` file given in the root of the CMS and change the connection string to your database. By default it is:
 
-`
+```
 {
   "Logging": {
     "LogLevel": {
@@ -44,7 +44,7 @@ Then open the `appsettings.json` file given in the root of the CMS and change th
     "IdentityConnection": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CMSCoreIdentity;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;"
   }
 }
-`
+```
 
 To run this CMS you will need 2 databases. One that will store pages, blogs, images, etc. The other one will be used by Identity Management to do authentication and authorization of Admin User.
 
